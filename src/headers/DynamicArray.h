@@ -25,14 +25,18 @@ class DynamicArray{
 
 
     //-----------------------------------------------------------------------
-    // Dodaje nowy element do tablicy.
+    // Dodaje nowy element na wskazane miejsce w tablicy.
     // 
     // Parametry:
     // new_element - nowa wartość, która ma zostać dodana do tablicy
+    // index - pozycja w tablicy, na którą ma zostać dodany nowy element  
     //-----------------------------------------------------------------------
-    public: void add(int new_element);
+    public: void add(int new_element, int index);
 
     // Usunięcie elementu o podanym indeksie
     public: void remove(int index);
+
+    // Wyświetlenie zawartości tablicy
+    public: void print();
 
 };
