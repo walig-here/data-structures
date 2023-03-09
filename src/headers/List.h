@@ -4,10 +4,11 @@ using namespace std;
 
 /* Struktura reprezentująca element listy */
 struct ListElement{
-    int value = NULL;       // wartość zawarta w elemencie listy
+    int value = NULL;               // wartość zawarta w elemencie listy
     ListElement* next = nullptr;    // adres kolejnego elementu
     ListElement* prev = nullptr;    // adres poprzedniego elementu 
 
+    // Konstruktor elementu listy
     ListElement(ListElement* prev = nullptr, int value = NULL, ListElement* next = nullptr){
         this->value = value;
         this->next = next;
