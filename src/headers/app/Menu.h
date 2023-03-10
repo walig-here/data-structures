@@ -48,12 +48,12 @@ class Menu{
 
     //-----------------------------------------------------------------------
     // Sprawdza, czy zadany symbol w formie ciągu znaków jest poprawny. Jeśli
-    // symbol jest niepoprawny to zwróci wartość -1. W przeciwnym wypadku
-    // zwróci zadany symbol w poprawnym formacie (liczba całkowita).
+    // symbol jest niepoprawny to zwróci wartość false. W przeciwnym wypadku
+    // zwróci wartość true.
     // 
     // Parametry:
     // token - symbol, który zostanie sprawdzony
     //-----------------------------------------------------------------------
-    private: int isValidToken(const string token);
+    private: bool isValidToken(const int token);
 
 };

@@ -1,5 +1,7 @@
-#include "app/Menu.h"
 #include <string.h>
+
+#include "app/Menu.h"
+#include "app/Console.h"
 
 Menu::Menu(string header){
 
@@ -47,43 +49,36 @@ void Menu::print(){
 int Menu::getUserChoice(){
 
     // Użytkownik dokonuje wyboru
-    string userChoice;
     int chosen_token;
     print();
-    cin >> userChoice;
 
     // Sprawdzam, czy użtykownik nie wybrał symbolu o niedozwolonym formacie (nie liczbę)
     // lub symbolu, który nie występuje w menu
-    chosen_token = isValidToken(userChoice);
-    if(chosen_token < 0) return chosen_token;
+    try{
+        chosen_token = Console::getIntInput();
+    }catch (invalid_argument e){
+        cout << e.what() << endl;
+        chosen_token = -1;
+    }
+    if(!isValidToken(chosen_token)) return chosen_token;
 
     // Zwracam symbol
     return chosen_token;
 
 }
 
-int Menu::isValidToken(const string token){
+bool Menu::isValidToken(const int token){
 
-    const string INVALID_FORMAT = "Symbol niedozwolonego formatu!";
     const string SYMBOL_DOES_NOT_EXIST = "Symbol nie istnieje!";
-    int validated_token = -1;
-
-    // Czy symbol ma dozwolony format?
-    try{
-        validated_token = stoi(token);
-    } catch(invalid_argument){
-        printf("%s\n", INVALID_FORMAT.c_str());
-        return -1;
-    }
 
     // Czy istnieje w menu?
     for(auto element : options){
-        if(validated_token != element->token) continue;
-        return validated_token;
+        if(token != element->token) continue;
+        return true;
     }
 
     // Nie istnieje w menu
     printf("%s\n", SYMBOL_DOES_NOT_EXIST.c_str());
-    return -2;
+    return false;
 
 }

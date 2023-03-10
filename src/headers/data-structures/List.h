@@ -24,6 +24,7 @@ class List
 
     public: ListElement* head;      // Głowa listy
     public: ListElement* tail;      // Ogon listy
+    private: bool print_backwards;  // czy lista ma być wyświetlana od tyłu?
 
 
     /* METODY */
@@ -32,6 +33,11 @@ class List
     // Konstruktor. Tworzy pustą listę dwukierunkową.
     //-----------------------------------------------------------------------
     public: List();
+
+    //-----------------------------------------------------------------------
+    // Konstruktor kopiujący.
+    //-----------------------------------------------------------------------
+    public: List(List* &to_copy); 
 
 
     //-----------------------------------------------------------------------
@@ -99,6 +105,24 @@ class List
 
 
     // Wyświetlenie listy (od początku lub końca)
-    public: void print(bool backwards = false);
+    public: void print();
 
+
+    // Zmiana kolejności wyświetlania listy
+    public: void swap();
+
+};
+
+// Zbiór działań możliwych do wykonania na liście
+enum ListActions{
+    BACK,
+    SWAP,
+    PUSH_FRONT,
+    PUSH_BACK,
+    ADD,
+    POP_FRONT,
+    POP_BACK,
+    REMOVE,
+    FIND,
+    CLEAR
 };

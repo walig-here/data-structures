@@ -7,12 +7,42 @@ List::List(){
 
     head = nullptr;
     tail = nullptr;
+    print_backwards = false;
+
+}
+
+List::List(List* &source){
+
+    // Ustalamy wartości bazowe ogona i głowy
+    List();
+
+    // Kopiujemy kolejność wyświetlania
+    this->print_backwards = source->print_backwards;
+
+    // Wykonujemy kopię wszystkich elementów
+    ListElement* source_element = source->head;
+    while(source_element != nullptr){
+        this->push_back(source_element->value);
+        source_element = source_element->next;
+    }
 
 }
 
 List::~List(){
 
+    // Dla pustej listy nic nie zwalniamy
+    if(head == nullptr) return;
 
+    // Zwalniamy kolejne elementy zaczynając od głowy
+    ListElement* current_element;
+    while(head != nullptr){
+        current_element = head;
+        head = current_element->next;
+        delete current_element;
+    }
+
+    // Czyścimy wskaźnik ogona
+    tail = nullptr;
 
 }
 
@@ -93,33 +123,39 @@ void List::push_back(const int new_element_value){
 
 }
 
-void List::print(bool backwards){
+void List::print(){
 
-    printf("Wyswietlanie listy ");
+    printf("Zawartosc listy ");
 
-    ListElement* current_element;
-    if(backwards) {
+    ListElement* current_element = nullptr;
+    if(print_backwards) {
         current_element = tail;
-        printf("(od tylu):\n");
+        printf("(od tylu): ");
     }
     else{
         current_element = head;
-        printf("(od przodu):\n");
+        printf("(od przodu): ");
     }
 
-    if(head == nullptr){
+    if(current_element == nullptr){
         printf("pusta\n");
         return;
     }
 
     while (current_element != nullptr){
 
-        printf("%d(@%lX)", current_element->value, (unsigned long int)current_element);
-        if(current_element != head || current_element != tail) printf("\t");   
+        printf("%d", current_element->value);
+        if(current_element != head || current_element != tail) printf(" ");   
         
-        if(backwards) current_element = current_element->prev;
+        if(print_backwards) current_element = current_element->prev;
         else current_element = current_element->next;
     }
     printf("\n");
 
+    printf("Glowa: %d\n", head->value);
+    printf("Ogon: %d\n", tail->value);
+}
+
+void List::swap(){
+    print_backwards = !print_backwards;
 }

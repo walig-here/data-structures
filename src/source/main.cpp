@@ -1,27 +1,28 @@
 #include <cstdlib>
 #include <stdio.h>
 
-#include "data-structures/List.h"
-#include "app/Menu.h"
+#include "app/ListModule.h"
 #include "app/Console.h"
 
 // Menu główne, pozwalające na wybór struktury, którą chcemy przetestować
-void dataStructureChoice();
+void mainMenu();
 
+// Menu działań dla listy dwukierunkowej
+void listMenu();
 
 // Główna funkcja aplikacji
 int main(int argc, char const *argv[])
 {
 
     // Głowne menu aplikacji
-    dataStructureChoice();
+    mainMenu();
         
     // Poprawne zamknięcie
     return 0;
 }
 
 
-void dataStructureChoice(){
+void mainMenu(){
 
     const int EXIT = 1;
     const int LIST = 2;
@@ -31,21 +32,19 @@ void dataStructureChoice(){
     menu.addOption(LIST, "Lista dwukierunkowa");
 
     bool is_running = true;
-    int user_choice;
     while (is_running){
         
         Console::clearScreen();         
-        user_choice = menu.getUserChoice();
-
-        switch (user_choice){
+        switch (menu.getUserChoice()){
             
             // Wyjście z aplikacji
             case EXIT: is_running = false; break;
-            // Lista
-            case LIST: break;
+            // Przejście do menu listy
+            case LIST: Module::start(ModuleTypes::LIST); break;
             // Nieznana opcja
             default: Console::waitForUserResponse(); break;
         }
+
     }
 
 }

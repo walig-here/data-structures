@@ -1,9 +1,12 @@
+#pragma once
+
 using namespace std;
 
 // Klasa obsługująca konstolę systemową
 class Console{
     
     /* POLE */
+    private: const static string INVALID_FORMAT;
 
     /* METODY */
     
@@ -12,5 +15,8 @@ class Console{
 
     // Funkcja czekająca na wprowadzenie ENTER
     public: static void waitForUserResponse();
+
+    // Funckja pobierająca od użytkownika liczę typu int
+    public: static int getIntInput(string msg = "");
 
 };
