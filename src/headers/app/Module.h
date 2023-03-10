@@ -12,7 +12,8 @@ class Module{
 
     /* POLA */
     protected: Menu* menu;    // menu modułu
-    protected: const static string INSERT_NEW_EMENT_VALUE;
+    protected: const static string INSERT_ELEMENT_VALUE;
+    protected: const static string ELEMENT_DOES_NOT_EXIST;
 
     /* METODY */
 

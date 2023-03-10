@@ -11,10 +11,7 @@ List::List(){
 
 }
 
-List::List(List* &source){
-
-    // Ustalamy wartości bazowe ogona i głowy
-    List();
+List::List(List* &source) : List(){
 
     // Kopiujemy kolejność wyświetlania
     this->print_backwards = source->print_backwards;
@@ -30,19 +27,8 @@ List::List(List* &source){
 
 List::~List(){
 
-    // Dla pustej listy nic nie zwalniamy
-    if(head == nullptr) return;
-
     // Zwalniamy kolejne elementy zaczynając od głowy
-    ListElement* current_element;
-    while(head != nullptr){
-        current_element = head;
-        head = current_element->next;
-        delete current_element;
-    }
-
-    // Czyścimy wskaźnik ogona
-    tail = nullptr;
+    while(pop_front());
 
 }
 
@@ -79,14 +65,15 @@ void List::add(const int new_element_value, const unsigned int new_element_index
 
 
     // Szukamy elementów, które będą sąsiadami nowego elementu, aby "umieścić" między nimi nowy element
-    ListElement* prev_element = nullptr;  // sąsiad "z lewej"
-    ListElement* next_element = nullptr;  // sąsiad "z prawej"
+    ListElement* prev_element = head;           // sąsiad "z lewej"
+    ListElement* next_element = nullptr;        // sąsiad "z prawej"
     for(int i = 0; prev_element != nullptr; i++){
 
+        if(i == new_element_index-1) {
+            next_element = prev_element->next;        
+            break;
+        }
         prev_element = prev_element->next;
-        if(i != new_element_index-1) continue;
-        next_element = prev_element->next;        
-        break;
 
     }
 
@@ -151,11 +138,50 @@ void List::print(){
         else current_element = current_element->next;
     }
     printf("\n");
-
-    printf("Glowa: %d\n", head->value);
-    printf("Ogon: %d\n", tail->value);
 }
 
 void List::swap(){
     print_backwards = !print_backwards;
+}
+
+bool List::pop_front(){
+
+    // Gdy lista jest pusta nie ma czego usuwać
+    if(head == nullptr) return false;
+
+    // Jeżeli głowa była jednymy elementem to musimy "wyzerować" także ogon
+    // W przeciwnym wypadku należy przepiąć wskaźnik elementu "za" głową
+    if(head->next == nullptr) {
+        delete head;
+        head = nullptr;
+        tail = nullptr;
+    }
+    else {
+        head = head->next;
+        delete head->prev;
+        head->prev = nullptr;
+    }
+    return true;
+
+}
+
+bool List::pop_back(){
+
+    // Gdy lista jest pusta to nie ma czego usuwać
+    if(tail == nullptr) return false;
+
+    // Jeżeli ogon był jedynym elementem to musimy "wyzerować" także głowę
+    // W przeciwnym wypadku należy przepiąć wskaźnik elementu "przed" ogonem
+    if(tail->prev == nullptr){
+        delete tail;
+        tail = nullptr;
+        head = nullptr;
+    }
+    else{
+        tail = tail->prev;
+        delete tail->next;
+        tail->next = nullptr;
+    }
+    return true;
+
 }

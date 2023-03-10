@@ -17,8 +17,7 @@ struct ListElement{
 };
 
 /* Klasa list dwukierunkowych */
-class List
-{
+class List{
 
     /* POLA */
 
@@ -60,14 +59,14 @@ class List
     // Pobranie wartości z głowy. W wypadku, gdy lista jest pusta zwrócony
     // zostanie nullptr.
     //-----------------------------------------------------------------------
-    public: inline ListElement* front();
+    public: ListElement* front();
 
 
     //-----------------------------------------------------------------------
     // Pobranie wartości z ogona. W wypadku, gdy lista jest pusta zwrócony
     // zostanie nullptr.
     //-----------------------------------------------------------------------
-    public: inline ListElement* back();
+    public: ListElement* back();
 
 
     //-----------------------------------------------------------------------
@@ -86,6 +85,20 @@ class List
     // new_element - wartość nowego elementu
     //-----------------------------------------------------------------------
     public: void push_back(const int new_element);
+
+
+    //-----------------------------------------------------------------------
+    // Usuwa element z początku kolejki. Zwraca true, gdy usunięcie 
+    // przebiegło pomyślnie. W przeciwnym wypadku zwraca false.
+    //-----------------------------------------------------------------------
+    public: bool pop_front();
+
+
+    //-----------------------------------------------------------------------
+    // Usuwa element z końca kolejki. Zwraca true, gdy usunięcie 
+    // przebiegło pomyślnie. W przeciwnym wypadku zwraca false.
+    //-----------------------------------------------------------------------
+    public: bool pop_back();
 
 
     //-----------------------------------------------------------------------
@@ -117,12 +130,14 @@ class List
 enum ListActions{
     BACK,
     SWAP,
+    HEAD,
+    TAIL,
     PUSH_FRONT,
     PUSH_BACK,
     ADD,
     POP_FRONT,
     POP_BACK,
     REMOVE,
+    CLEAR,
     FIND,
-    CLEAR
 };

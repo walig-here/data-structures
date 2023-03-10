@@ -10,6 +10,10 @@ class ListModule : virtual public Module{
     /* POLA */
     private: List* list;         // lista obsługiwana przez moduł
 
+    private: static const string INSERT_INDEX;
+    private: static const string FTCHED_ELEMENT;
+    private: static const string LIST_EMPTY;
+
     /* METODY */
 
     // Konstruktor

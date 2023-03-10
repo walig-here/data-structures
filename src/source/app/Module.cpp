@@ -1,6 +1,7 @@
 #include "app/ListModule.h"
 
-const string Module::INSERT_NEW_EMENT_VALUE = "Wprowadz wartosc nowego elementu.";
+const string Module::INSERT_ELEMENT_VALUE = "Wprowadz wartosc elementu.";
+const string Module::ELEMENT_DOES_NOT_EXIST = "Wskazany element nie zjaduje sie w tej strukturze!";
 
 void Module::start(ModuleTypes module_type){
 
