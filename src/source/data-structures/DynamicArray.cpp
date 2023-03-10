@@ -1,4 +1,4 @@
-#include "DynamicArray.h"
+#include "data-structures/DynamicArray.h"
 #include <iostream>
 
 using namespace std;
@@ -22,14 +22,14 @@ DynamicArray::~DynamicArray(){
 int DynamicArray::operator[](int index){
 
     // Sprawdzenie poprawnosci indeksu
-    if(index < 0 || index >= length) return NULL;
+    if(index < 0 || index >= length) return 0;
 
     // Zwrócenie wartości zawartej pod podanym indeksem
     return array_address[index];
 
 }
 
-void DynamicArray::add(int new_element){
+void DynamicArray::add(int new_element, int index){
 
     // Relokacja tablicy
     array_address = (int*) realloc(array_address, ++length * sizeof(int));

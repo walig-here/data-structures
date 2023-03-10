@@ -4,12 +4,12 @@ using namespace std;
 
 /* Struktura reprezentująca element listy */
 struct ListElement{
-    int value = NULL;               // wartość zawarta w elemencie listy
-    ListElement* next = nullptr;    // adres kolejnego elementu
-    ListElement* prev = nullptr;    // adres poprzedniego elementu 
+    int value;                      // wartość zawarta w elemencie listy
+    ListElement* next;              // adres kolejnego elementu
+    ListElement* prev;              // adres poprzedniego elementu 
 
     // Konstruktor elementu listy
-    ListElement(ListElement* prev = nullptr, int value = NULL, ListElement* next = nullptr){
+    ListElement(ListElement* prev = nullptr, int value = 0, ListElement* next = nullptr){
         this->value = value;
         this->next = next;
         this->prev = prev;
@@ -21,8 +21,10 @@ class List
 {
 
     /* POLA */
-    public: ListElement* head;      // Głowa kolejki
-    public: ListElement* tail;      // Ogon kolejki
+
+    public: ListElement* head;      // Głowa listy
+    public: ListElement* tail;      // Ogon listy
+
 
     /* METODY */
 
@@ -39,29 +41,27 @@ class List
 
 
     //-----------------------------------------------------------------------
-    // Pobranie wartości z elementu o wskaznym indeksie. W wypadku zadania
-    // indeksu o niepoprawnej wartości wywołany zostanie wyjątek "invalid index".
-    // W wypadku użycie operatora na liście pustej wywołany zostanie wyjątek
-    // "list is empty".
+    // Wyszukuje w liście element o wskazanej wartości i zwraca jego adres.
+    // W wypadku nie znalezienia żadnego elementu zwróci nullptr.
     //
     // Parametry:
-    // index - indeks elementu, którego wartość ma zostać zwrócona
+    // value - wartość, jaką ma mieć wyszukiwany element
     //-----------------------------------------------------------------------
-    public: int operator[](const unsigned int index);
+    public: ListElement* find(const int value);
 
 
     //-----------------------------------------------------------------------
-    // Pobranie wartości z głowy. W wypadku, gdy lista jest pusta wywołany
-    // zostanie wyjątek "list is empty".
+    // Pobranie wartości z głowy. W wypadku, gdy lista jest pusta zwrócony
+    // zostanie nullptr.
     //-----------------------------------------------------------------------
-    public: int front();
+    public: inline ListElement* front();
 
 
     //-----------------------------------------------------------------------
-    // Pobranie wartości z ogona. W wypadku, gdy lista jest pusta wywołany
-    // zostanie wyjątek "listy is empty".
+    // Pobranie wartości z ogona. W wypadku, gdy lista jest pusta zwrócony
+    // zostanie nullptr.
     //-----------------------------------------------------------------------
-    public: int back();
+    public: inline ListElement* back();
 
 
     //-----------------------------------------------------------------------
@@ -74,7 +74,7 @@ class List
 
 
     //-----------------------------------------------------------------------
-    // Dodaje element na koniec listy
+    // Dodaje element na koniec listy.
     //
     // Parametry:
     // new_element - wartość nowego elementu
