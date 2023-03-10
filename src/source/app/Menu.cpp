@@ -1,4 +1,4 @@
-#include "Menu.h"
+#include "app/Menu.h"
 #include <string.h>
 
 Menu::Menu(string header){
@@ -39,7 +39,7 @@ void Menu::print(){
 
     printf("%s\n", header.c_str());
     printf("%s\n", MANUAL.c_str());
-    for(auto element : options) printf("[ %d ]\t\t%s\n", element->token, element->desc.c_str());
+    for(auto element : options) printf("[ %d ]\t%s\n", element->token, element->desc.c_str());
     printf("> ");
 
 }

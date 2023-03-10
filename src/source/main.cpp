@@ -1,18 +1,13 @@
 #include <cstdlib>
 #include <stdio.h>
+
 #include "data-structures/List.h"
 #include "app/Menu.h"
-
-#define LINUX
+#include "app/Console.h"
 
 // Menu główne, pozwalające na wybór struktury, którą chcemy przetestować
 void dataStructureChoice();
 
-// Funkcja czyszcząca konsolę
-void clearScreen();
-
-// Funkcja czekająca na wprowadzenie ENTER
-void waitForUserResponse();
 
 // Główna funkcja aplikacji
 int main(int argc, char const *argv[])
@@ -39,7 +34,7 @@ void dataStructureChoice(){
     int user_choice;
     while (is_running){
         
-        clearScreen();         
+        Console::clearScreen();         
         user_choice = menu.getUserChoice();
 
         switch (user_choice){
@@ -49,32 +44,8 @@ void dataStructureChoice(){
             // Lista
             case LIST: break;
             // Nieznana opcja
-            default: waitForUserResponse(); break;
+            default: Console::waitForUserResponse(); break;
         }
     }
-    
 
 }
-
-void waitForUserResponse(){
-
-    fflush(stdin);
-    printf("Wcisnij dowolny klawisz, aby kontynuowac...");
-    getchar(); getchar();
-
-}
-
-#ifdef WINDOWS
-    #include <windows.h>
-#endif
-void clearScreen(){
-    // Obsługa konsoli dla dystrybucji na system MS Windows
-    #ifdef WINDOWS  
-        system("cls");
-    #endif
-    // Obsługa konstoli dla dystrybucji na systemy Linux
-    #ifdef LINUX
-        system("clear");
-    #endif
-}
-
