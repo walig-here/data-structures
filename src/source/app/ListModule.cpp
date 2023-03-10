@@ -36,91 +36,38 @@ void ListModule::loop(){
             case ListActions::SWAP: list->swap(); break;
 
             // Dodanie elementu na początek
-            case ListActions::PUSH_FRONT: 
-                try{
-                    list->push_front(Console::getIntInput(INSERT_ELEMENT_VALUE)); 
-                } catch(invalid_argument e){
-                    cout << e.what() << endl;
-                    Console::waitForUserResponse();
-                }
-            break;
+            case ListActions::PUSH_FRONT: pushFront(); break;
 
             // Dodanie elementu na koniec listy
-            case ListActions::PUSH_BACK:
-                try{
-                    list->push_back(
-                        Console::getIntInput(INSERT_ELEMENT_VALUE)
-                    );
-                } catch(invalid_argument e){
-                    cout  << e.what() << endl;
-                    Console::waitForUserResponse();
-                }
-            break;    
+            case ListActions::PUSH_BACK: pushBack(); break;    
 
             // Dodanie elementu w dowolne miejsce
-            case ListActions::ADD:
-                try{
-                    list->add(  
-                        Console::getIntInput(INSERT_ELEMENT_VALUE), 
-                        Console::getIntInput(INSERT_INDEX)-1
-                    );
-                } catch(invalid_argument e){
-                    cout << e.what() << endl;
-                    Console::waitForUserResponse();
-                }
-            break;
+            case ListActions::ADD: add(); break;
 
             // Pobierz głowę
-            case ListActions::HEAD:{
-                ListElement* head = list->front();
-                if(head == nullptr) printf("%s\n", LIST_EMPTY.c_str());
-                else printf("%s: %d\n", FTCHED_ELEMENT.c_str(), head->value);
-                Console::waitForUserResponse();
-            }break;
+            case ListActions::HEAD: head(); break;
 
             // Pobierz ogon
-            case ListActions::TAIL:{
-                ListElement* tail = list->back();
-                if(tail == nullptr) printf("%s\n", LIST_EMPTY.c_str());
-                else printf("%s: %d\n", FTCHED_ELEMENT.c_str(), tail->value);
-                Console::waitForUserResponse();
-            }break;
+            case ListActions::TAIL: tail(); break;
 
             // Wyszukanie elementu
-            case ListActions::FIND:{
-                ListElement* element = list->find(Console::getIntInput(INSERT_ELEMENT_VALUE));
-                if(element == nullptr) printf("%s\n", ELEMENT_DOES_NOT_EXIST.c_str());
-                else printf("%s: %d\n", FTCHED_ELEMENT.c_str(), element->value);
-                Console::waitForUserResponse();
-            }break;
+            case ListActions::FIND: find(); break;
 
             // Usunięcie elementu z głowy
-            case ListActions::POP_FRONT:
-                if(!list->pop_front()) {
-                    printf("%s\n", LIST_EMPTY.c_str());
-                    Console::waitForUserResponse();
-                }
-            break;
+            case ListActions::POP_FRONT: pop_front(); break;
 
             // Usunięcie elementu z ogona
-            case ListActions::POP_BACK:
-                if(!list->pop_back()) {
-                    printf("%s\n", LIST_EMPTY.c_str());
-                    Console::waitForUserResponse();
-                }
-            break;
+            case ListActions::POP_BACK: pop_back(); break;
 
-            // Wyczyść całą listę
-            case ListActions::CLEAR:
-                delete list;
-                list = new List();
-            break;
+            // Usunięcie elementu z dowolnego miejsca listy
+            case ListActions::REMOVE: remove(); break;
 
             // Nieznana opcja
             default: Console::waitForUserResponse(); break;
         }
     }
 
+    // Usunięcie porzedniego stanu listy
     if(previous_state != nullptr) {
         delete previous_state;
         previous_state = nullptr;
@@ -150,5 +97,102 @@ ListModule::ListModule() : Module("LISTA DWUKIERUNKOWA"){
 ListModule::~ListModule(){
 
     delete list;
+
+}
+
+void ListModule::pushFront(){
+
+    try{
+        list->push_front(Console::getIntInput(INSERT_ELEMENT_VALUE)); 
+    } catch(invalid_argument e){
+        cout << e.what() << endl;
+        Console::waitForUserResponse();
+    }
+
+}
+
+void ListModule::pushBack(){
+
+    try{
+        list->push_back(Console::getIntInput(INSERT_ELEMENT_VALUE));
+    } catch(invalid_argument e){
+        cout  << e.what() << endl;
+        Console::waitForUserResponse();
+    }
+
+}
+
+void ListModule::add(){
+
+    try{
+        list->add(  
+            Console::getIntInput(INSERT_ELEMENT_VALUE), 
+            Console::getIntInput(INSERT_INDEX)-1
+        );
+    } catch(invalid_argument e){
+        cout << e.what() << endl;
+        Console::waitForUserResponse();
+    }
+
+}
+
+void ListModule::head(){
+
+    ListElement* head_element = list->front();
+
+    if(head_element == nullptr) printf("%s\n", LIST_EMPTY.c_str());
+    else printf("%s: %d\n", FTCHED_ELEMENT.c_str(), head_element->value);
+
+    Console::waitForUserResponse();
+
+}
+
+void ListModule::tail(){
+
+    ListElement* tail_element = list->back();
+
+    if(tail_element == nullptr) printf("%s\n", LIST_EMPTY.c_str());
+    else printf("%s: %d\n", FTCHED_ELEMENT.c_str(), tail_element->value);
+
+    Console::waitForUserResponse();
+
+}
+
+void ListModule::find(){
+
+    ListElement* element = list->find(Console::getIntInput(INSERT_ELEMENT_VALUE));
+
+    if(element == nullptr) printf("%s\n", ELEMENT_DOES_NOT_EXIST.c_str());
+    else printf("%s: %d\n", FTCHED_ELEMENT.c_str(), element->value);
+
+    Console::waitForUserResponse();
+
+}
+
+void ListModule::pop_front(){
+
+    if(list->pop_front()) return;
+    printf("%s\n", LIST_EMPTY.c_str());
+    Console::waitForUserResponse();
+
+}
+
+void ListModule::pop_back(){
+
+    if(list->pop_back()) return;
+    printf("%s\n", LIST_EMPTY.c_str());
+    Console::waitForUserResponse();
+
+}
+
+void ListModule::remove(){
+
+    try{
+        if(list->remove(Console::getIntInput(INSERT_INDEX)-1)) return;
+        printf("%s\n", ELEMENT_DOES_NOT_EXIST.c_str());
+    } catch(invalid_argument e){
+        cout << e.what() << endl;
+    }
+    Console::waitForUserResponse();
 
 }

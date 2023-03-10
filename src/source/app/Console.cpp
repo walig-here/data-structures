@@ -1,8 +1,9 @@
-#define LINUX
+#define WINDOWS
 #ifdef WINDOWS 
     #include <windows.h>
 #endif
 #include <iostream>
+#include <string>
 
 #include "app/Console.h"
 

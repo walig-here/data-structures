@@ -113,8 +113,12 @@ class List{
     public: void add(const int new_element, const unsigned int index);
 
 
-    // Usunięcie elementu o zadanym indeksie z listy
-    public: void remove(const unsigned int index);
+    //-----------------------------------------------------------------------
+    // Usunięcie elementu o zadanym indeksie z listy. Zwraca false, jeżeli
+    // akcja usunięcia zakończyła się niepowodzeniem. W przeciwnym wypadku
+    // zwraca true.
+    //-----------------------------------------------------------------------
+    public: bool remove(const unsigned int index);
 
 
     // Wyświetlenie listy (od początku lub końca)
@@ -138,6 +142,5 @@ enum ListActions{
     POP_FRONT,
     POP_BACK,
     REMOVE,
-    CLEAR,
     FIND,
 };

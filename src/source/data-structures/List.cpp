@@ -185,3 +185,30 @@ bool List::pop_back(){
     return true;
 
 }
+
+bool List::remove(const unsigned int wanted_index){
+
+    // Jeżeli usuwamy z pierwszej pozycji, to lepiej jest użyć pop_front()
+    if(wanted_index == 0) return pop_front();
+
+    // Szukamy sądiadów z lewej i prawej elementu, który usuwamy
+    // Następnie przepinamy ich wskaźniki i usuwamy element
+    // Sprawdzam także, czy element nie jest ogonem, bo wtedy lepiej jest uzyć pop_back()
+    ListElement* element = head->next;
+    for(int index = 1; element != nullptr; index++){
+        
+        if(wanted_index == index){
+            if(element == tail) return pop_back();
+            element->prev->next = element->next;
+            element->next->prev = element->prev;
+            delete element;
+            return true;
+        }
+        element = element->next;
+
+    }  
+
+    // Element nie istnieje
+    return false;
+
+}
