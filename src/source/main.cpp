@@ -39,10 +39,13 @@ void mainMenu(){
             
             // Wyjście z aplikacji
             case EXIT: is_running = false; break;
+
             // Przejście do menu listy
             case LIST: Module::start(ModuleTypes::LIST); break;
+
             // Nieznana opcja
             default: Console::waitForUserResponse(); break;
+            
         }
 
     }

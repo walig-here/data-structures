@@ -89,7 +89,6 @@ ListModule::ListModule() : Module("LISTA DWUKIERUNKOWA"){
     menu->addOption(ListActions::POP_FRONT, "Usun element z poczatku listy");
     menu->addOption(ListActions::POP_BACK, "Usun element z konca listy");
     menu->addOption(ListActions::REMOVE, "Usun element z dowolnego miejsca listy");
-    menu->addOption(ListActions::CLEAR, "Wyczysc liste");
     menu->addOption(ListActions::FIND, "Wyszukaj element w liscie");
 
 }
