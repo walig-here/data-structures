@@ -1,8 +1,7 @@
-#include <cstdlib>
-#include <stdio.h>
-
-#include "app/ListModule.h"
-#include "app/Console.h"
+#include "app/utility/FileReader.h"
+#include "app/modules/ListModule.h"
+#include "app/utility/Console.h"
+#include "app/utility/StringParser.h"
 
 // Menu główne, pozwalające na wybór struktury, którą chcemy przetestować
 void mainMenu();
@@ -13,6 +12,17 @@ void listMenu();
 // Główna funkcja aplikacji
 int main(int argc, char const *argv[])
 {
+
+    list<string>* list = FileReader::readAllLines("plik.txt");
+    if(list == nullptr) return 0;
+    std::list<string>* words;
+    for(auto line : *list) {
+        cout << line << endl;
+        words = StringParser::parse(line);
+        for(auto word : *words) cout << "\t" << word << endl;
+    }
+    delete list;
+    return 0;
 
     // Głowne menu aplikacji
     mainMenu();

@@ -1,11 +1,11 @@
-#define WINDOWS
+#define LINUX
 #ifdef WINDOWS 
     #include <windows.h>
 #endif
 #include <iostream>
 #include <string>
 
-#include "app/Console.h"
+#include "app/utility/Console.h"
 
 const string Console::INVALID_FORMAT = "Niepoprawny format danych wejsciowych!";
 

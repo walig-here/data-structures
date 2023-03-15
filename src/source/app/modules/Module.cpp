@@ -1,4 +1,4 @@
-#include "app/ListModule.h"
+#include "app/modules/ListModule.h"
 
 const string Module::INSERT_ELEMENT_VALUE = "Wprowadz wartosc elementu.";
 const string Module::ELEMENT_DOES_NOT_EXIST = "Wskazany element nie zjaduje sie w tej strukturze!";

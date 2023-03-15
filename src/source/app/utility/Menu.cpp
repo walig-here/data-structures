@@ -1,7 +1,7 @@
 #include <string.h>
 
-#include "app/Menu.h"
-#include "app/Console.h"
+#include "app/utility/Menu.h"
+#include "app/utility/Console.h"
 
 Menu::Menu(string header){
 

@@ -1,5 +1,5 @@
-#include "app/ListModule.h"
-#include "app/Console.h"
+#include "app/modules/ListModule.h"
+#include "app/utility/Console.h"
 
 const string ListModule::INSERT_INDEX = "Wprowadz pozycje elementu (indeksujac od 1)";
 const string ListModule::FTCHED_ELEMENT = "Pobrany element";
