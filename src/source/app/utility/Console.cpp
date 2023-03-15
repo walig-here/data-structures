@@ -1,4 +1,4 @@
-#define LINUX
+#define WINDOWS
 #ifdef WINDOWS 
     #include <windows.h>
 #endif
@@ -30,17 +30,23 @@ void Console::waitForUserResponse(){
 
 int Console::getIntInput(string msg){
 
-    string user_input;
-    if(msg != "") cout << msg << "\n>";
-    cin >> user_input;
-
     int int_input;
     try{
-        int_input = stoi(user_input);
+        int_input = stoi(getInput(msg));
     } catch(invalid_argument){
         throw invalid_argument(INVALID_FORMAT);
     }
 
     return int_input;
+
+}
+
+string Console::getInput(string msg){
+
+    string user_input;
+    if(msg != "") cout << msg << "\n>";
+    cin >> user_input;
+
+    return user_input;
 
 }

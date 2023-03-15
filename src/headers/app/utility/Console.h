@@ -17,7 +17,10 @@ class Console{
     // Funkcja czekająca na wprowadzenie ENTER
     public: static void waitForUserResponse();
 
-    // Funckja pobierająca od użytkownika liczę typu int
+    // Funckja pobierająca od użytkownika liczbę typu int
     public: static int getIntInput(string msg = "");
+
+    // Funkcja pobierająca od użytkownika dane wejściowe w postaci ciągu znaków
+    public: static string getInput(string msg = "");
 
 };

@@ -23,4 +23,15 @@ class StringParser{
     /// Listę wydzielonych wyrazów lub nullptr w wypadku podania pustego ciągu znaków.
     public: static list<string>* parse(string to_parse);
 
+
+    /// @brief
+    /// Wydziela z ciągu znaków wszystkie liczby całkowite
+    ///
+    /// @param to_parse ciąg znaków, z którego zostaną wydzielone liczby
+    ///
+    /// @return
+    /// Tablicę wydzielonych liczb całkowitych zawartych w zadanym ciągu lub nullptr w wypadku
+    /// podania pustego ciągu znaków bądź ciągu niezawierającego żadnych liczb całkowitych.
+    public: static list<int>* parseInt(string to_parse);
+
 };

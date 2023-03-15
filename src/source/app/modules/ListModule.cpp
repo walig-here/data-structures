@@ -62,6 +62,9 @@ void ListModule::loop(){
             // Usunięcie elementu z dowolnego miejsca listy
             case ListActions::REMOVE: remove(); break;
 
+            // Wczytanie z pliku
+            case ListActions::LOAD_DATA: load(); break;
+
             // Nieznana opcja
             default: Console::waitForUserResponse(); break;
         }
@@ -90,6 +93,7 @@ ListModule::ListModule() : Module("LISTA DWUKIERUNKOWA"){
     menu->addOption(ListActions::POP_BACK, "Usun element z konca listy");
     menu->addOption(ListActions::REMOVE, "Usun element z dowolnego miejsca listy");
     menu->addOption(ListActions::FIND, "Wyszukaj element w liscie");
+    menu->addOption(ListActions::LOAD_DATA, "Wczytaj dane z pliku");
 
 }
 
@@ -193,5 +197,16 @@ void ListModule::remove(){
         cout << e.what() << endl;
     }
     Console::waitForUserResponse();
+
+}
+
+void ListModule::load(){
+
+    if(list != nullptr){
+        delete list;
+        list = nullptr;
+    }
+    list = new List(Console::getInput(INSERT_PATH));
+    if(list->front() == nullptr) Console::waitForUserResponse();
 
 }

@@ -1,5 +1,10 @@
 #include <iostream>
+#include <list>
+
+#include "app/utility/FileReader.h"
+#include "app/utility/StringParser.h"
 #include "data-structures/List.h"
+
 
 using namespace std;
 
@@ -25,6 +30,27 @@ List::List(List* &source) : List(){
 
 }
 
+List::List(string file) : List() {
+
+    // Wczytujemy dane z pliku
+    vector<int>* file_data = FileReader::readAllIntegers(file);
+    if(file_data == nullptr) return;
+
+    
+    // Pierwszą liczbę traktujemy jako rozmiar struktury, kolejne jako wartości w niej zawarte
+    // Jeżeli rozmiar jest <=0 to przerywamy wczytywanie.
+    // Tak samo jeżeli w pliku znajduje się mniej liczb niż zadeklarowano we wczytanej wartości.
+    unsigned size = (*file_data)[0];
+    if(size <= 0 || file_data->size() <= size){
+        delete file_data;
+        printf("W pliku '%s' znajduja sie niepoprawne dane!\n", file.c_str());
+        return;
+    }
+    for(int i = 1; i <= size; i++) push_back((*file_data)[i]);
+    delete file_data;
+
+}
+
 List::~List(){
 
     // Zwalniamy kolejne elementy zaczynając od głowy
@@ -44,13 +70,13 @@ ListElement* List::back(){
 
 }
 
-ListElement* List::find(const int value){
+ListElement* List::find(int value){
 
     // Sprawdzamy, czy nie jest to wartość zapisana w ogonie
     if(tail != nullptr && tail->value == value) return tail;
 
     // Przeszukujemy listę w poszukiwaniu elementu o wskazanej wartości
-    // W wypadku, gdy taka w liście nie wystąpi zwórcony zostanie nullptr
+    // W wypadku, gdy taka w liście nie wystąpi, zwórcony zostanie nullptr
     ListElement* found_element = head;
     while (found_element != nullptr && found_element->value != value)
         found_element = found_element->next;
@@ -118,8 +144,7 @@ void List::print(){
     if(print_backwards) {
         current_element = tail;
         printf("(od tylu): ");
-    }
-    else{
+    } else {
         current_element = head;
         printf("(od przodu): ");
     }
@@ -146,7 +171,7 @@ void List::swap(){
 
 bool List::pop_front(){
 
-    // Gdy lista jest pusta nie ma czego usuwać
+    // Gdy lista jest pusta, to nie ma czego usuwać
     if(head == nullptr) return false;
 
     // Jeżeli głowa była jednymy elementem to musimy "wyzerować" także ogon
@@ -193,7 +218,7 @@ bool List::remove(const unsigned int wanted_index){
 
     // Szukamy sądiadów z lewej i prawej elementu, który usuwamy
     // Następnie przepinamy ich wskaźniki i usuwamy element
-    // Sprawdzam także, czy element nie jest ogonem, bo wtedy lepiej jest uzyć pop_back()
+    // Sprawdzam także, czy element nie jest ogonem, bo wtedy lepiej jest użyć metody pop_back()
     ListElement* element = head->next;
     for(int index = 1; element != nullptr; index++){
         

@@ -40,6 +40,15 @@ class List{
 
 
     //-----------------------------------------------------------------------
+    // Konstruktor tworzący listę na podstawie danych wczytanych z pliku.
+    //
+    // Parametry:
+    // file - nazwa pliku, z którego zostaną wczytane dane
+    //-----------------------------------------------------------------------
+    public: List(string file);
+
+
+    //-----------------------------------------------------------------------
     // Destruktor. Zwalnia pamięć po liście dwukierunkowej.
     //-----------------------------------------------------------------------
     public: ~List();
@@ -143,4 +152,5 @@ enum ListActions{
     POP_BACK,
     REMOVE,
     FIND,
+    LOAD_DATA
 };

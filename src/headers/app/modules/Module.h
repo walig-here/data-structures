@@ -14,6 +14,7 @@ class Module{
     protected: Menu* menu;    // menu modułu
     protected: const static string INSERT_ELEMENT_VALUE;
     protected: const static string ELEMENT_DOES_NOT_EXIST;
+    protected: static const string INSERT_PATH;
 
     /* METODY */
 

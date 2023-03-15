@@ -2,6 +2,7 @@
 
 const string Module::INSERT_ELEMENT_VALUE = "Wprowadz wartosc elementu.";
 const string Module::ELEMENT_DOES_NOT_EXIST = "Wskazany element nie zjaduje sie w tej strukturze!";
+const string Module::INSERT_PATH = "Wprowadz siezke do pliku.";
 
 void Module::start(ModuleTypes module_type){
 

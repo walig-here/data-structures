@@ -52,4 +52,7 @@ class ListModule : virtual public Module{
     // Usunięcie element z dowolnego miejsca
     private: void remove();
 
+    // Wczytanie danych
+    private: void load();
+
 };

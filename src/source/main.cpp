@@ -12,18 +12,6 @@ void listMenu();
 // Główna funkcja aplikacji
 int main(int argc, char const *argv[])
 {
-
-    list<string>* list = FileReader::readAllLines("plik.txt");
-    if(list == nullptr) return 0;
-    std::list<string>* words;
-    for(auto line : *list) {
-        cout << line << endl;
-        words = StringParser::parse(line);
-        for(auto word : *words) cout << "\t" << word << endl;
-    }
-    delete list;
-    return 0;
-
     // Głowne menu aplikacji
     mainMenu();
         
