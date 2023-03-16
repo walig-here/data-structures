@@ -33,6 +33,7 @@ class List{
     //-----------------------------------------------------------------------
     public: List();
 
+
     //-----------------------------------------------------------------------
     // Konstruktor kopiujący.
     //-----------------------------------------------------------------------
@@ -61,7 +62,7 @@ class List{
     // Parametry:
     // value - wartość, jaką ma mieć wyszukiwany element
     //-----------------------------------------------------------------------
-    public: ListElement* find(const int value);
+    public: ListElement* find(int value);
 
 
     //-----------------------------------------------------------------------
@@ -84,7 +85,7 @@ class List{
     // Parametry:
     // new_element - wartość nowego elementu
     //-----------------------------------------------------------------------
-    public: void push_front(const int new_element);
+    public: void push_front(int new_element);
 
 
     //-----------------------------------------------------------------------
@@ -93,7 +94,7 @@ class List{
     // Parametry:
     // new_element - wartość nowego elementu
     //-----------------------------------------------------------------------
-    public: void push_back(const int new_element);
+    public: void push_back(int new_element);
 
 
     //-----------------------------------------------------------------------
@@ -119,22 +120,29 @@ class List{
     // new_element - wartośc nowego elementu
     // index - indeks na jaki ma dostać dodany nowy element
     //-----------------------------------------------------------------------
-    public: void add(const int new_element, const unsigned int index);
+    public: void add(int new_element, unsigned index);
 
 
     //-----------------------------------------------------------------------
     // Usunięcie elementu o zadanym indeksie z listy. Zwraca false, jeżeli
     // akcja usunięcia zakończyła się niepowodzeniem. W przeciwnym wypadku
     // zwraca true.
+    //
+    // Parametry:
+    // index - indeks elementu, który ma zostać usunięty
     //-----------------------------------------------------------------------
-    public: bool remove(const unsigned int index);
+    public: bool remove(unsigned index);
 
 
-    // Wyświetlenie listy (od początku lub końca)
+    //-----------------------------------------------------------------------
+    // Wyświetla zawartość listy.
+    //-----------------------------------------------------------------------
     public: void print();
 
 
-    // Zmiana kolejności wyświetlania listy
+    //-----------------------------------------------------------------------
+    // Zmienia kolejność wyświetlania listy. 
+    //-----------------------------------------------------------------------
     public: void swap();
 
 };

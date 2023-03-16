@@ -1,8 +1,11 @@
 #include "app/modules/ListModule.h"
 #include "app/utility/Console.h"
+#include "app/modules/ListModule.h"
+#include "app/utility/RandomNumberGenerator.h"
+#include "app/utility/Timer.h"
 
-const string ListModule::INSERT_INDEX = "Wprowadz pozycje elementu (indeksujac od 1)";
-const string ListModule::FTCHED_ELEMENT = "Pobrany element";
+#include <list>
+
 const string ListModule::LIST_EMPTY = "Lista jest pusta!";
 
 void ListModule::loop(){

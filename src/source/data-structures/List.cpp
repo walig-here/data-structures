@@ -84,7 +84,7 @@ ListElement* List::find(int value){
 
 }
 
-void List::add(const int new_element_value, const unsigned int new_element_index){
+void List::add(int new_element_value, unsigned new_element_index){
 
     // Jeżeli dodajemy na początek to lepiej jest użyć metody push_front
     if(new_element_index == 0) return push_front(new_element_value);
@@ -114,7 +114,7 @@ void List::add(const int new_element_value, const unsigned int new_element_index
 
 }
 
-void List::push_front(const int new_element_value){
+void List::push_front(int new_element_value){
 
     ListElement* new_element = new ListElement(nullptr, new_element_value, head);
     if(head != nullptr) head->prev = new_element;
@@ -125,7 +125,7 @@ void List::push_front(const int new_element_value){
 
 }
 
-void List::push_back(const int new_element_value){
+void List::push_back(int new_element_value){
 
     ListElement* new_element = new ListElement(tail, new_element_value, nullptr);
     if(tail != nullptr) tail->next = new_element;
@@ -138,9 +138,9 @@ void List::push_back(const int new_element_value){
 
 void List::print(){
 
-    printf("Zawartosc listy ");
-
     ListElement* current_element = nullptr;
+
+    printf("Zawartosc listy ");
     if(print_backwards) {
         current_element = tail;
         printf("(od tylu): ");
@@ -174,7 +174,7 @@ bool List::pop_front(){
     // Gdy lista jest pusta, to nie ma czego usuwać
     if(head == nullptr) return false;
 
-    // Jeżeli głowa była jednymy elementem to musimy "wyzerować" także ogon
+    // Jeżeli głowa była jednymy elementem, to musimy "wyzerować" także ogon
     // W przeciwnym wypadku należy przepiąć wskaźnik elementu "za" głową
     if(head->next == nullptr) {
         delete head;
@@ -211,7 +211,7 @@ bool List::pop_back(){
 
 }
 
-bool List::remove(const unsigned int wanted_index){
+bool List::remove(unsigned wanted_index){
 
     // Jeżeli usuwamy z pierwszej pozycji, to lepiej jest użyć pop_front()
     if(wanted_index == 0) return pop_front();
