@@ -1,7 +1,6 @@
 #include "app/modules/ListModule.h"
 #include "app/utility/Console.h"
 #include "app/utility/RandomNumberGenerator.h"
-#include "app/utility/Timer.h"
 
 
 // Opcje do wyboru w menu głównym
@@ -9,6 +8,7 @@ enum MainMenuOptions{
     EXIT,
     LIST_MODULE,
     ARRAY_MODULE,
+    HEAP_MODULE,
     GENERATE_RANDOM_DATA
 };
 
@@ -52,6 +52,9 @@ void mainMenu(){
 
             // Przejście do menu tablicy
             case MainMenuOptions::ARRAY_MODULE: Module::start(ModuleTypes::ARRAY); break;
+
+            // Przejście do menu kopca
+            case MainMenuOptions::HEAP_MODULE: Module::start(ModuleTypes::HEAP); break;
 
             // Wygenerowanie losowych danych
             case MainMenuOptions::GENERATE_RANDOM_DATA: 

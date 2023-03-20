@@ -178,3 +178,10 @@ int* DynamicArray::find(int value){
     return nullptr;
 
 }
+
+int* DynamicArray::operator[](unsigned index){
+
+    if(index >= length) return nullptr;
+    return &(array_address[index]);
+
+}

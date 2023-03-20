@@ -95,6 +95,12 @@ class DynamicArray{
     //-----------------------------------------------------------------------
     public: int* find(int value);
 
+    // Pobranie długości tablicy
+    public: inline unsigned getLength() { return length; }
+
+    // Pobranie elementu o zadanym indeksie
+    public: int* operator[](unsigned index);
+
 };
 
 enum ArrayActions{

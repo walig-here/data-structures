@@ -1,4 +1,4 @@
-#define WINDOWS
+#define LINUX
 #ifdef WINDOWS 
     #include <windows.h>
 #endif

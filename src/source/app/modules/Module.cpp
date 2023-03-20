@@ -1,5 +1,6 @@
 #include "app/modules/ListModule.h"
 #include "app/modules/ArrayModule.h"
+#include "app/modules/HeapModule.h"
 
 const string Module::INSERT_ELEMENT_VALUE = "Wprowadz wartosc elementu.";
 const string Module::ELEMENT_DOES_NOT_EXIST = "Wskazany element nie zjaduje sie w tej strukturze!";
@@ -16,6 +17,9 @@ void Module::start(ModuleTypes module_type){
         
         // Moduł tablicy dynamicznej
         case ModuleTypes::ARRAY: module = new ArrayModule(); break;
+
+        // Moduł kopca
+        case ModuleTypes::HEAP: module = new HeapModule(); break;
     }
     
     module->loop();
