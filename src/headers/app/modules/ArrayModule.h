@@ -1,3 +1,4 @@
+#pragma once
 #include "app/modules/Module.h"
 #include "data-structures/DynamicArray.h"
 

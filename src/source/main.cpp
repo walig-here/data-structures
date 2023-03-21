@@ -36,6 +36,7 @@ void mainMenu(){
     menu.addOption(MainMenuOptions::EXIT, "Zamknij program");
     menu.addOption(MainMenuOptions::LIST_MODULE, "Lista dwukierunkowa");
     menu.addOption(MainMenuOptions::ARRAY_MODULE, "Tablica dynamiczna");
+    menu.addOption(MainMenuOptions::HEAP_MODULE, "Kopiec");
     menu.addOption(MainMenuOptions::GENERATE_RANDOM_DATA, "Wygeneruj plik z danymi losowymi");
 
     bool is_running = true;

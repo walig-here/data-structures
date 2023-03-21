@@ -181,6 +181,7 @@ int* DynamicArray::find(int value){
 
 int* DynamicArray::operator[](unsigned index){
 
+    if(this == nullptr) return nullptr;
     if(index >= length) return nullptr;
     return &(array_address[index]);
 

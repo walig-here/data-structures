@@ -1,15 +1,17 @@
+#pragma once
 #include "data-structures/DynamicArray.h"
 
-// Klasa reprezentująca kopiec
+// Klasa reprezentująca kopiec maksymalny
 class Heap{
 
     /* POLA */
     private: DynamicArray elements;     // implementacja kopca w formie tablicy
+    private: bool max_heap;             // czy kopiec jest maksymalny?
 
     /* METODY */
 
     // Konstruktor
-    public: Heap();
+    public: Heap(bool max_heap);
 
     // Destruktor
     public: ~Heap();
@@ -24,10 +26,24 @@ class Heap{
     public: bool remove(int element_value);
 
     // Znalezienie elementu
-    private: int* find();
+    public: int* find();
+
+    // Naprawa kopca za pomocą algorytmu Floyda
+    private: void repair();
+
+    // Pobranie lewego potomka
+    private: int getLeftChild(unsigned index);
+
+    // Pobranie prawego potomka
+    private: int getRightChild(unsigned index);
+
+    // Naprawienie węzła rodzic-potomkowie
+    // Zwraca true, jeżeli wystąpiła zmaiana lub false, gdy nie wystąpiła
+    private: bool repairNode(int &parent_index, int &left_child_index, int &right_child_index);
 
 };
 
 enum HeapActions{
-    EXIT_HEAP
+    EXIT_HEAP,
+    ADD_HEAP
 };

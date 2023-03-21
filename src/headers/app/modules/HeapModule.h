@@ -1,5 +1,8 @@
+#pragma once
 #include "app/modules/Module.h"
 #include "data-structures/Heap.h"
+
+using namespace std;
 
 class HeapModule : public Module {
 
@@ -16,5 +19,8 @@ class HeapModule : public Module {
 
     // Pętla główna modułu
     private: virtual void loop();
+
+    // Dodanie elementu
+    private: void add();
 
 };
