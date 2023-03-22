@@ -120,6 +120,9 @@ void DynamicArray::remove(unsigned index){
     delete[] array_address;
     array_address = new_address;
 
+    // Jeżeli tablica po wykonaniu usunięcia jest pusta to ustawiam jej adres na nullptr
+    if(length == 0) array_address = nullptr;
+
 }
 
 void DynamicArray::pop_front(){
@@ -136,6 +139,9 @@ void DynamicArray::pop_front(){
     // Zwalniam poprzednią lokalizację tablicy i ustalam nową wartość adresu
     delete[] array_address;
     array_address = new_address;
+
+    // Jeżeli tablica po wykonaniu usunięcia jest pusta to ustawiam jej adres na nullptr
+    if(length == 0) array_address = nullptr;
 
 }
 
@@ -166,6 +172,9 @@ void DynamicArray::pop_back(){
     // Zwalniam poprzednią lokalizację tablicy i ustalam nową wartość adresu
     delete[] array_address;
     array_address = new_address;
+
+    // Jeżeli tablica po wykonaniu usunięcia jest pusta to ustawiam jej adres na nullptr
+    if(length == 0) array_address = nullptr;
 
 }
 
