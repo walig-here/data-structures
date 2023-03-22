@@ -24,21 +24,19 @@ DynamicArray::DynamicArray(DynamicArray *array) : DynamicArray() {
 DynamicArray::DynamicArray(string file) : DynamicArray() {
 
     // Wczytujemy dane z pliku
-    vector<int>* file_data = FileReader::readAllIntegers(file);
-    if(file_data == nullptr) return;
+    vector<int> file_data = FileReader::readAllIntegers(file);
+    if(file_data.size() == 0) return;
 
     
     // Pierwszą liczbę traktujemy jako rozmiar struktury, kolejne jako wartości w niej zawarte
     // Jeżeli rozmiar jest <=0 to przerywamy wczytywanie.
     // Tak samo jeżeli w pliku znajduje się mniej liczb niż zadeklarowano we wczytanej wartości.
-    unsigned size = (*file_data)[0];
-    if(size <= 0 || file_data->size() <= size){
-        delete file_data;
+    unsigned size = file_data[0];
+    if(size <= 0 || file_data.size() <= size){
         printf("W pliku '%s' znajduja sie niepoprawne dane!\n", file.c_str());
         return;
     }
-    for(int i = 1; i <= size; i++) push_back((*file_data)[i]);
-    delete file_data;
+    for(int i = 1; i <= size; i++) push_back(file_data[i]);
 
 }
 

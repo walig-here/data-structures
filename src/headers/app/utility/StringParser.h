@@ -20,8 +20,8 @@ class StringParser{
     /// @param to_parse ciąg znaków, z którego będziemy wydzielać wyrazy
     ///
     /// @return
-    /// Listę wydzielonych wyrazów lub nullptr w wypadku podania pustego ciągu znaków.
-    public: static list<string>* parse(string to_parse);
+    /// Listę wydzielonych wyrazów lub pustą listę w wypadku podania pustego ciągu znaków.
+    public: static list<string> parse(string to_parse);
 
 
     /// @brief
@@ -30,8 +30,8 @@ class StringParser{
     /// @param to_parse ciąg znaków, z którego zostaną wydzielone liczby
     ///
     /// @return
-    /// Tablicę wydzielonych liczb całkowitych zawartych w zadanym ciągu lub nullptr w wypadku
+    /// Tablicę wydzielonych liczb całkowitych zawartych w zadanym ciągu lub pustą listę w wypadku
     /// podania pustego ciągu znaków bądź ciągu niezawierającego żadnych liczb całkowitych.
-    public: static list<int>* parseInt(string to_parse);
+    public: static list<int> parseInt(string to_parse);
 
 };

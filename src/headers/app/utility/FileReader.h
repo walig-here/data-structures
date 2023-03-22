@@ -23,10 +23,10 @@ class FileReader{
     ///
     /// @return 
     /// Listę pobranych linii lub wskaźnik nullptr, gdy plik jest pusty
-    public: static list<string>* readAllLines( const string file );
+    public: static list<string> readAllLines( const string file );
 
 
     // Wczytuje wszystkie liczby całowite z pliku
-    public: static vector<int>* readAllIntegers( string file );
+    public: static vector<int> readAllIntegers( string file );
 
 };
