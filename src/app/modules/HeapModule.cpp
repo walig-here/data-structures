@@ -1,12 +1,16 @@
 #include "app/modules/HeapModule.h"
 #include "app/utility/Console.h"
+#include "app/utility/FileReader.h"
 
 HeapModule::HeapModule() : Module("KOPIEC") {
 
-    heap = new Heap(true);
+    heap = new Heap();
 
     menu->addOption(HeapActions::EXIT_HEAP, "Powrot do menu glownego");
     menu->addOption(HeapActions::ADD_HEAP, "Dodaj element do kopca");
+    menu->addOption(HeapActions::REMOVE_HEAP, "Usun korzen kopca");
+    menu->addOption(HeapActions::FIND_HEAP, "Znajdz element w kopcu");
+    menu->addOption(HeapActions::LOAD_HEAP, "Wczytaj dane z pliku");
 
 }
 
@@ -19,7 +23,6 @@ HeapModule::~HeapModule(){
 void HeapModule::loop(){
 
     bool is_running = true;
-    bool is_max = true;
     Heap* previous_state = nullptr;
 
     while (is_running){
@@ -34,7 +37,7 @@ void HeapModule::loop(){
             delete previous_state;
             previous_state = nullptr;
         }
-        previous_state = new Heap(is_max);
+        previous_state = new Heap(heap);
 
         cout << "OBECNY STAN KOPCA:\n";
         heap->print();
@@ -47,6 +50,15 @@ void HeapModule::loop(){
 
             // Dodanie elementu
             case HeapActions::ADD_HEAP: add(); break;
+
+            // Usunięcie krozenia
+            case HeapActions::REMOVE_HEAP: removeRoot(); break;
+
+            // Wyszukanie elementu w kopcu
+            case HeapActions::FIND_HEAP: find(); break;
+
+            // Wczytanie danych
+            case HeapActions::LOAD_HEAP: load(); break;
 
             // Nieznana opcja
             default: Console::waitForUserResponse(); break;
@@ -70,5 +82,41 @@ void HeapModule::add(){
     } catch(invalid_argument e){
         cout << e.what() << endl;
     }
+
+}
+
+void HeapModule::load(){
+
+    if(heap != nullptr){
+        delete heap;
+        heap = nullptr;
+    }
+    heap = new Heap(FileReader::readAllIntegers(Console::getInput(INSERT_PATH)));
+    if(heap->root() == nullptr) {
+        cout << "Nastapil blad wczytywania danych!" << endl;
+        Console::waitForUserResponse();
+    }
+
+}
+
+void HeapModule::removeRoot(){
+
+    heap->pop_root();
+
+}
+
+void HeapModule::find(){
+
+    int* element;
+    try{
+        element = heap->find(Console::getIntInput(INSERT_ELEMENT_VALUE));
+    } catch(invalid_argument e){
+        cout << e.what() << endl;
+        return;
+    }
+
+    if(element == nullptr) cout << "Element nie znajduje sie w tej strukturze!" << endl;
+    else  cout << "Znaleziony element: " << *element << endl;
+    Console::waitForUserResponse();
 
 }

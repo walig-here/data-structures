@@ -42,6 +42,14 @@ DynamicArray::~DynamicArray(){
 
 }
 
+void DynamicArray::swap(unsigned index_1, unsigned index_2){
+
+    int temp = array_address[index_1];
+    array_address[index_1] = array_address[index_2];
+    array_address[index_2] = temp;
+
+}
+
 void DynamicArray::add(int new_element, unsigned index){
 
     // Jeżeli indeks to 0, to dodajemy na początek

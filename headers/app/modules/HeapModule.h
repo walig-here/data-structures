@@ -23,4 +23,13 @@ class HeapModule : public Module {
     // Dodanie elementu
     private: void add();
 
+    // Wczytanie danych z pliku
+    private: void load();
+
+    // Usunięcie korzenia
+    private: void removeRoot();
+
+    // Pobranie watości
+    private: void find();
+
 };

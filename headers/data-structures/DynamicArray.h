@@ -103,6 +103,10 @@ class DynamicArray{
     // Pobranie elementu o zadanym indeksie
     public: int* operator[](unsigned index);
 
+
+    // Zamiana elementów miejscami
+    public: void swap(unsigned index_1, unsigned index_2);
+
 };
 
 enum ArrayActions{
