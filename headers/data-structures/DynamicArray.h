@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -20,12 +21,12 @@ class DynamicArray{
     public: DynamicArray(DynamicArray* array);
 
     //-----------------------------------------------------------------------
-    // Konstruktor tworzący tablice na podstawie danych wczytanych z pliku.
+    // Konstruktor tworzący tablice na podstawie zadanego ciągu liczb.
     //
     // Parametry:
-    // file - nazwa pliku, z którego zostaną wczytane dane
+    // elements - ciąg liczb, z którego ma zostać zbudowana tablica
     //-----------------------------------------------------------------------
-    public: DynamicArray(string file);
+    public: DynamicArray(vector<int> elements);
 
 
     // Destruktor

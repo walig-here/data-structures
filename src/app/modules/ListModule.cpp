@@ -3,6 +3,7 @@
 #include "app/modules/ListModule.h"
 #include "app/utility/RandomNumberGenerator.h"
 #include "app/utility/Timer.h"
+#include "app/utility/FileReader.h"
 
 #include <list>
 
@@ -209,7 +210,7 @@ void ListModule::load(){
         delete list;
         list = nullptr;
     }
-    list = new List(Console::getInput(INSERT_PATH));
+    list = new List(FileReader::readAllIntegers(Console::getInput(INSERT_PATH)));
     if(list->front() == nullptr) Console::waitForUserResponse();
 
 }

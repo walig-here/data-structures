@@ -1,5 +1,6 @@
 #include "app/modules/ArrayModule.h"
 #include "app/utility/Console.h"
+#include "app/utility/FileReader.h"
 
 ArrayModule::ArrayModule() : Module("TABLICA DYNAMICZNA"){
 
@@ -170,6 +171,6 @@ void ArrayModule::load(){
         delete array;
         array = nullptr;
     }
-    array = new DynamicArray(Console::getInput(INSERT_PATH));
+    array = new DynamicArray(FileReader::readAllIntegers(Console::getInput(INSERT_PATH)));
 
 }

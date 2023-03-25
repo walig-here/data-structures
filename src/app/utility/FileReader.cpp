@@ -31,13 +31,27 @@ vector<int> FileReader::readAllIntegers( string file ){
     if(lines.size() == 0) return integers;
 
     // Wydzielam z poszczególnych linii kolejne liczby całkowite
+    int amount = -1;
     list<int> line_integers;
     for(auto line : lines){
         
         line_integers = StringParser::parseInt(line);
         if(line_integers.size() == 0) continue;
 
-        for(auto integer : line_integers) integers.push_back(integer);
+        // Jeżeli wczytaliśmy pierwszą liczbę z pliku, to zapisujemy ją jako ilośc dopuszczalnych liczb i
+        // usuwamy ją z wczytanego wektora (nie jest ona przeznaczona do wczytania)
+        if(amount == -1){
+            cout << "wielkosc " << line_integers.size() << endl;
+            amount = line_integers.front();
+            line_integers.pop_front();
+        }
+
+        // Wczytuje tyle liczb ile wynosi amount
+        for(auto integer : line_integers) {
+            if(amount == 0) return integers;
+            integers.push_back(integer);
+            amount--;
+        }
         line_integers.clear();
 
     }

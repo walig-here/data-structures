@@ -1,1 +1,1 @@
-g++ -I src/headers src/source/data-structures/*.cpp src/source/*.cpp src/source/app/modules/*.cpp src/source/app/utility/*.cpp -o out/sdizo-projekt-1 -O
+g++ -I headers src/data-structures/*.cpp src/*.cpp src/app/modules/*.cpp src/app/utility/*.cpp -o out/sdizo-projekt-1 -O

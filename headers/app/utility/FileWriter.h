@@ -15,9 +15,9 @@ class FileWriter{
     private: ~FileWriter() {}
 
     // Zapisuje dane liczbowe do pliku
-    public: static bool saveInt(list<int>* integers, string file);
+    public: static bool saveInt(list<int> integers, string file);
 
     // Zapisuje dane alfanumeryczne do pliku
-    public: static bool save(list<string>* lines, string file);
+    public: static bool save(list<string> lines, string file);
 
 };

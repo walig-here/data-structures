@@ -2,7 +2,7 @@
 
 #include <fstream>
 
-bool FileWriter::saveInt(list<int>* integers, string file_name){
+bool FileWriter::saveInt(list<int> integers, string file_name){
 
     // Próbujemy stworzyć plik, do którego zapiszemy nasze liczby
     fstream file;
@@ -11,7 +11,7 @@ bool FileWriter::saveInt(list<int>* integers, string file_name){
 
     // Zapisujemy
     int p = 0;
-    for(auto integer : *integers){
+    for(auto integer : integers){
         file << integer << " ";
         if(p%100 == 99) file << "\n";
         p++;
@@ -21,7 +21,7 @@ bool FileWriter::saveInt(list<int>* integers, string file_name){
     return true;
 }
 
-bool FileWriter::save(list<string>* lines, string file_name){
+bool FileWriter::save(list<string> lines, string file_name){
 
     // Próbujemy stworzyć plik, do którego zapiszemy nasze liczby
     fstream file;
@@ -29,7 +29,7 @@ bool FileWriter::save(list<string>* lines, string file_name){
     if(!file.good()) return false;
 
     // Zapisujemy
-    for(auto line : *lines) file << line << endl;
+    for(auto line : lines) file << line << endl;
     file.close();
 
     return true;

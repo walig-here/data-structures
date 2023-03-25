@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -41,12 +42,12 @@ class List{
 
 
     //-----------------------------------------------------------------------
-    // Konstruktor tworzący listę na podstawie danych wczytanych z pliku.
+    // Konstruktor tworzący listę na podstawie zadanego ciągu liczb
     //
     // Parametry:
-    // file - nazwa pliku, z którego zostaną wczytane dane
+    // elements - ciąg, na bazie ktrórego ma zostać zbudowana lista
     //-----------------------------------------------------------------------
-    public: List(string file);
+    public: List(vector<int> elements);
 
 
     //-----------------------------------------------------------------------
