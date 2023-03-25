@@ -44,6 +44,11 @@ DynamicArray::~DynamicArray(){
 
 void DynamicArray::swap(unsigned index_1, unsigned index_2){
 
+    // Sprawdzam poprawność zadanych indeksów
+    if(index_1 >= length) return;  
+    if(index_2 >= length) return;    
+
+    // Zamieniam miejscami wskazane elementy
     int temp = array_address[index_1];
     array_address[index_1] = array_address[index_2];
     array_address[index_2] = temp;

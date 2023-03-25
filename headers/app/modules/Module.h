@@ -7,7 +7,8 @@ using namespace std;
 enum ModuleTypes{
     LIST,
     ARRAY,
-    HEAP
+    HEAP,
+    BST
 };
 
 // Klasa służąca do obługi modułów aplikacji

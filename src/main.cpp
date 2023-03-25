@@ -9,6 +9,7 @@ enum MainMenuOptions{
     LIST_MODULE,
     ARRAY_MODULE,
     HEAP_MODULE,
+    BST_MODULE,
     GENERATE_RANDOM_DATA
 };
 
@@ -37,6 +38,7 @@ void mainMenu(){
     menu.addOption(MainMenuOptions::LIST_MODULE, "Lista dwukierunkowa");
     menu.addOption(MainMenuOptions::ARRAY_MODULE, "Tablica dynamiczna");
     menu.addOption(MainMenuOptions::HEAP_MODULE, "Kopiec");
+    menu.addOption(MainMenuOptions::BST_MODULE, "Drzewo wyszukiwan binarnych");
     menu.addOption(MainMenuOptions::GENERATE_RANDOM_DATA, "Wygeneruj plik z danymi losowymi");
 
     bool is_running = true;
@@ -56,6 +58,9 @@ void mainMenu(){
 
             // Przejście do menu kopca
             case MainMenuOptions::HEAP_MODULE: Module::start(ModuleTypes::HEAP); break;
+
+            // Przejście do menu drzewa BST
+            case MainMenuOptions::BST_MODULE: Module::start(ModuleTypes::BST); break;
 
             // Wygenerowanie losowych danych
             case MainMenuOptions::GENERATE_RANDOM_DATA: 
