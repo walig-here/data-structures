@@ -1,3 +1,6 @@
+#include <vector>
+
+using namespace std;
 
 /* Struktura reprezentująca węzeł drzewa BST */
 struct Node{
@@ -51,11 +54,15 @@ class BinarySearchTree{
     // Rotacja w lewo
     public: void rotateLeft(int value);
 
-    // Równoważenie drzewea
+    // Równoważenie drzewa
     public: void balance();
+
+    // Zwraca tablicę pozwalającą na na poprawne wyświetlenie drzewa (jak kopca)
+    private: void indexNodes(vector<Node*> &nodes, Node* node, int node_index);
 
 };
 
 enum BSTACtions{
-    EXIT_BST
+    EXIT_BST,
+    ADD_BST
 };

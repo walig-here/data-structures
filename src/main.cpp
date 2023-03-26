@@ -16,9 +16,6 @@ enum MainMenuOptions{
 // Menu główne, pozwalające na wybór struktury, którą chcemy przetestować
 void mainMenu();
 
-// Menu działań dla listy dwukierunkowej
-void listMenu();
-
 // Główna funkcja aplikacji
 int main(int argc, char const *argv[])
 {

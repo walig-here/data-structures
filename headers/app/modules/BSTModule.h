@@ -20,4 +20,7 @@ class BSTModule : public Module {
     // Pętla główna modułu
     private: virtual void loop();
 
+    // Dodanie węzła do drzewa
+    private: void add();
+
 };

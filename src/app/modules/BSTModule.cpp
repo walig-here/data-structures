@@ -6,6 +6,7 @@ BSTModule::BSTModule() : Module("DRZEWO WYSZUKIWAN BINARNYCH") {
     tree = new BinarySearchTree();
 
     menu->addOption(BSTACtions::EXIT_BST, "Powrot do menu glownego");
+    menu->addOption(BSTACtions::ADD_BST, "Dodaj element do drzewa");
 
 }
 
@@ -43,6 +44,9 @@ void BSTModule::loop(){
             // Powrót do menu głównego
             case BSTACtions::EXIT_BST: is_running = false; break;
 
+            // Dodanie elementu
+            case BSTACtions::ADD_BST: add(); break;
+
             // Nieznana opcja
             default: Console::waitForUserResponse(); break;
 
@@ -54,6 +58,16 @@ void BSTModule::loop(){
     if(previous_state != nullptr) {
         delete previous_state;
         previous_state = nullptr;
+    }
+
+}
+
+void BSTModule::add(){
+
+    try{
+        tree->add(Console::getIntInput(INSERT_ELEMENT_VALUE));
+    } catch(invalid_argument e){
+        cout << e.what() << endl;
     }
 
 }
