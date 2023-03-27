@@ -4,7 +4,8 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/headers"
+                "${workspaceFolder}/headers",
+                "D:\\C++ Development\\lib\\googletest\\googletest\\include"
             ],
             "defines": [
                 "_DEBUG",

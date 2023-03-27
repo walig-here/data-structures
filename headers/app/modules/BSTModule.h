@@ -23,4 +23,13 @@ class BSTModule : public Module {
     // Dodanie węzła do drzewa
     private: void add();
 
+    // Usunięcie węzła
+    private: void remove();
+
+    // Rotacja w lewo
+    private: void rotateLeft();
+
+    // Rotacja w prawo
+    private: void rotateRight();
+
 };

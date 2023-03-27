@@ -60,9 +60,24 @@ class BinarySearchTree{
     // Zwraca tablicę pozwalającą na na poprawne wyświetlenie drzewa (jak kopca)
     private: void indexNodes(vector<Node*> &nodes, Node* node, int node_index);
 
+    // Zwraca korzeń
+    public: Node* getRoot() { return root; }
+
+    // Zwraca węzeł maksymalny z drzewa o podanym korzeniu
+    public: Node* maxNode(Node* root);
+
+    // Zwraca węzeł minimalny z drzewa o podanym korzewniu
+    public: Node* minNode(Node* root);
+
+    // Zwraca następnika wskazanego węzła
+    public: Node* getSuccessor(Node* node);
+
 };
 
 enum BSTACtions{
     EXIT_BST,
-    ADD_BST
+    ADD_BST,
+    REMOVE_BST,
+    ROTATE_LEFT,
+    ROTATE_RIGHT
 };

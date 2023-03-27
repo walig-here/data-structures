@@ -26,7 +26,9 @@ BinarySearchTree::BinarySearchTree(){
 
 BinarySearchTree::~BinarySearchTree(){
 
-    
+    while(root != nullptr) {
+        remove(root->value);
+    }
 
 }
 
@@ -46,6 +48,26 @@ void BinarySearchTree::indexNodes(vector<Node*> &nodes, Node* node, int node_ind
     nodes[node_index] = node;
     indexNodes(nodes, node->left, 2*node_index+1);
     indexNodes(nodes, node->right, 2*node_index+2);
+
+}
+
+Node* BinarySearchTree::find(int value){
+
+    // Przeszukuję drzewo w dół zaczynając od korzenia, rozważając kolejne wierzchołki.
+    // Jeżeli szukany element jest większy od aktualnego elementu, to szukam go w prawym poddrzewie
+    // Jeżeli mniejszy, to szukam go w lewym poddrzewie
+    // Jeżeli jest równy to kończymy przeszukiwanie
+    Node* current_node = root;
+    while (current_node != nullptr){
+        
+        if(current_node->value == value) return current_node;
+        
+        if(value < current_node->value) current_node = current_node->left;
+        else current_node = current_node->right;
+
+    }
+    return nullptr;
+    
 
 }
 
@@ -93,6 +115,152 @@ void BinarySearchTree::print(){
         }
         if(y%2 == 1) p /= 2;
     }
+
+}
+
+void BinarySearchTree::rotateRight(int value){
+
+    // Znaduję wierzchołek względem którego obracamy
+    // Jeżeli nie istnieje lub nie ma lewego potomka to nie obracam
+    Node* node = find(value);
+    if(node == nullptr || node->left == nullptr) return;
+    Node* left_tree_root = node->left;
+
+    // Obracam
+    node->left = left_tree_root->right;
+    if(node->left != nullptr) node->left->parent = node;
+    left_tree_root->right = node;
+    left_tree_root->parent = node->parent;
+    node->parent = left_tree_root;
+
+    // Naprawiamy rodzica obracanego wierzchołka
+    if(left_tree_root->parent == nullptr) {
+        root = left_tree_root; 
+        return; 
+    }
+
+    if(left_tree_root->value < left_tree_root->parent->value) left_tree_root->parent->left = left_tree_root;
+    else left_tree_root->parent->right = left_tree_root;
+
+}
+
+void BinarySearchTree::rotateLeft(int value){
+
+    // Znaduję wierzchołek względem którego obracamy
+    // Jeżeli nie istnieje lub nie ma prawego potomka to nie obracam
+    Node* node = find(value);
+    if(node == nullptr || node->right == nullptr) return;
+    Node* right_tree_root = node->right;
+
+    // Obracam
+    node->right = right_tree_root->left;
+    if(node->right != nullptr) node->right->parent = node;
+    right_tree_root->left = node;
+    right_tree_root->parent = node->parent;
+    node->parent = right_tree_root;
+
+    // Naprawiamy rodzica obracanego wierzchołka
+    if(right_tree_root->parent == nullptr){
+        root = right_tree_root;
+        return;
+    }
+
+    if(right_tree_root->value < right_tree_root->parent->value) right_tree_root->parent->left = right_tree_root;
+    else right_tree_root->parent->right = right_tree_root;
+
+}
+
+Node* BinarySearchTree::maxNode(Node* root){
+
+    // W pustym drzewie nie szukamy
+    if(root == nullptr) return nullptr;
+
+    // Zwracamy najbardziej wysunięty na prawo wierzchołek
+    Node* maximum = root;
+    while ( maximum->right != nullptr ) maximum = maximum->right;
+    return maximum;    
+
+}
+
+void BinarySearchTree::remove(int value){
+
+    // Znajduje wskazywany węzeł. Jeżeli nie ma takiego w drzewie to nie usuwam.
+    Node* node = find(value);
+    if(node == nullptr) return;
+
+    // Jeżeli węzeł istnieje, to:
+    // Gdy jest liściem, to po prostu odłączam go od drzewa i usuwam
+    // Gdy ma jednego potomka, to w miejsce węzła wstawiam jego potomka
+    // Gdy ma dwóch potomków, to kopiuje wartość następnika, a następnik usuwam
+    if(node->left == nullptr && node->right == nullptr){
+
+        Node* parent = node->parent;
+        if(parent == nullptr) {
+            delete root;
+            root = nullptr;
+            return;
+        }
+
+        if(parent->left == node) parent->left = nullptr;
+        else parent->right = nullptr;
+        delete node;
+        return;
+
+    }
+
+    if(node->left != nullptr && node->right != nullptr){
+
+        Node* successor = getSuccessor(node);
+        int successor_value = successor->value;
+        remove(successor_value);
+        node->value = successor_value;
+        return;
+
+    }
+
+    Node* child;
+    if(node->left != nullptr) child = node->left;
+    else child = node->right;
+    child->parent = node->parent;
+    if(node->parent == nullptr) {
+        delete root;
+        root = child;
+        return;
+    }
+    if(node->parent->left == node) node->parent->left = child;
+    else node->parent->right = child;
+    delete node;
+
+}
+
+Node* BinarySearchTree::minNode(Node* root){
+
+    // W pustym drzewie nie szukamy
+    if(root == nullptr) return nullptr;
+
+    // Zwracamy najbardziej wysunięty na lewo wierzchołek
+    Node* minimum = root;
+    while ( minimum->left != nullptr ) minimum = minimum->left;
+    return minimum;  
+
+}
+
+Node* BinarySearchTree::getSuccessor(Node* node){
+
+    // W pustym drzewie nie szukam
+    if(root == nullptr) return nullptr;
+
+    // Jeżeli ma prawe poddrzewo, to następnik jest maksium tego poddrzewa
+    // W przeciwnym wypadku następnik jest pierwszym węzłem większym od tego węzła
+    Node* successor = minNode(node->right);
+    if(successor != nullptr) return successor;
+
+    successor = node->parent;
+    while (successor != nullptr){
+        if(successor->value > node->value) break;
+        successor = successor->parent;
+    }
+    return successor;
 
 }
 

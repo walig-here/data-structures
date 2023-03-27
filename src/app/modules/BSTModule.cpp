@@ -7,6 +7,9 @@ BSTModule::BSTModule() : Module("DRZEWO WYSZUKIWAN BINARNYCH") {
 
     menu->addOption(BSTACtions::EXIT_BST, "Powrot do menu glownego");
     menu->addOption(BSTACtions::ADD_BST, "Dodaj element do drzewa");
+    menu->addOption(BSTACtions::REMOVE_BST, "Usun element z drzewa");
+    menu->addOption(BSTACtions::ROTATE_LEFT, "Rotacja w lewo wzgledem wezla");
+    menu->addOption(BSTACtions::ROTATE_RIGHT, "Rotacja w prawo wzgledem wezla");
 
 }
 
@@ -47,6 +50,15 @@ void BSTModule::loop(){
             // Dodanie elementu
             case BSTACtions::ADD_BST: add(); break;
 
+            // Usunięcie elementu
+            case BSTACtions::REMOVE_BST: remove(); break;
+
+            // Rotacja w lewo
+            case BSTACtions::ROTATE_LEFT: rotateLeft(); break;
+
+            // Rotacja w prawo
+            case BSTACtions::ROTATE_RIGHT: rotateRight(); break;
+
             // Nieznana opcja
             default: Console::waitForUserResponse(); break;
 
@@ -58,6 +70,36 @@ void BSTModule::loop(){
     if(previous_state != nullptr) {
         delete previous_state;
         previous_state = nullptr;
+    }
+
+}
+
+void BSTModule::rotateRight(){
+
+    try{
+        tree->rotateRight(Console::getIntInput(INSERT_ELEMENT_VALUE));
+    } catch(invalid_argument e){
+        cout << e.what() << endl;
+    }
+
+}
+
+void BSTModule::rotateLeft(){
+
+    try{
+        tree->rotateLeft(Console::getIntInput(INSERT_ELEMENT_VALUE));
+    } catch(invalid_argument e){
+        cout << e.what() << endl;
+    }
+
+}
+
+void BSTModule::remove(){
+    
+    try{
+        tree->remove(Console::getIntInput(INSERT_ELEMENT_VALUE));
+    } catch(invalid_argument e){
+        cout << e.what() << endl;
     }
 
 }
