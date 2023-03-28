@@ -32,4 +32,7 @@ class BSTModule : public Module {
     // Rotacja w prawo
     private: void rotateRight();
 
+    // Zrównoważenie drzewa
+    private: void balance();
+
 };

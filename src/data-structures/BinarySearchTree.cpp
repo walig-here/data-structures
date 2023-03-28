@@ -293,3 +293,46 @@ void BinarySearchTree::add(int value){
     
 
 }
+
+void BinarySearchTree::straighten(){
+
+    // Wykonuje rotacje w prawo na każdym z węzłów, dopóki ma on swoich lewych potomków
+    Node* node = root;
+    while (node != nullptr){
+        if(node->left == nullptr) node = node->right;
+        else {
+            rotateRight(node->value);
+            cout << node->value << endl;
+        }
+    }
+    
+
+}
+
+void BinarySearchTree::balance(){
+
+    // Etap I - prostowanie
+    straighten();
+
+    // Etap II - równoważenie
+    // Wynonuję m-n rotacji w lewo zaczynając od korzenia co drugi wierzchołek
+    unsigned size = 0;
+    getSize(root, size);
+    unsigned m = pow( 2, floor(log2(size+1)) ) - 1;
+    
+    Node* node = root;
+    for(int i = m - size; node != nullptr && i > 0; i--){
+        rotateLeft(node->value);
+        node = node->right->right;
+    }
+
+}
+
+void BinarySearchTree::getSize(Node* root, unsigned& size){
+
+    if(root == nullptr) return;
+    size++;
+    getSize(root->left, size);
+    getSize(root->right, size); 
+
+}

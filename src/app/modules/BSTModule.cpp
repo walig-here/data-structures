@@ -10,6 +10,7 @@ BSTModule::BSTModule() : Module("DRZEWO WYSZUKIWAN BINARNYCH") {
     menu->addOption(BSTACtions::REMOVE_BST, "Usun element z drzewa");
     menu->addOption(BSTACtions::ROTATE_LEFT, "Rotacja w lewo wzgledem wezla");
     menu->addOption(BSTACtions::ROTATE_RIGHT, "Rotacja w prawo wzgledem wezla");
+    menu->addOption(BSTACtions::BALANCE, "Zrownowaz drzewo");
 
 }
 
@@ -58,6 +59,9 @@ void BSTModule::loop(){
 
             // Rotacja w prawo
             case BSTACtions::ROTATE_RIGHT: rotateRight(); break;
+
+            // Równoważanie drzewa
+            case BSTACtions::BALANCE: balance(); break;
 
             // Nieznana opcja
             default: Console::waitForUserResponse(); break;
@@ -111,5 +115,11 @@ void BSTModule::add(){
     } catch(invalid_argument e){
         cout << e.what() << endl;
     }
+
+}
+
+void BSTModule::balance(){
+
+    tree->balance();
 
 }

@@ -72,6 +72,12 @@ class BinarySearchTree{
     // Zwraca następnika wskazanego węzła
     public: Node* getSuccessor(Node* node);
 
+    // Prostuje drzewo
+    private: void straighten();
+
+    // Zlicza ilość wierzchołków drzewa o zadanym korzeniu
+    public: void getSize(Node* root, unsigned& tree_size);
+
 };
 
 enum BSTACtions{
@@ -79,5 +85,6 @@ enum BSTACtions{
     ADD_BST,
     REMOVE_BST,
     ROTATE_LEFT,
-    ROTATE_RIGHT
+    ROTATE_RIGHT,
+    BALANCE
 };
