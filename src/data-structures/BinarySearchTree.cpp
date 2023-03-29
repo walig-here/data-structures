@@ -24,6 +24,30 @@ BinarySearchTree::BinarySearchTree(){
 
 }
 
+BinarySearchTree::BinarySearchTree(BinarySearchTree* to_copy) : BinarySearchTree() {
+
+    // Jako że jest to de facto wczytywanie, to wykorzystuję funkcję używającą vector, którą wykorzystałem także
+    // przy wyświetlaniu drzewa.
+    vector<Node*> nodes;
+    to_copy->indexNodes(nodes, to_copy->getRoot(), 0);
+
+    // Kopiuję wszystkie elementy z wektora (niezerowe)
+    for(auto node : nodes){
+        if(node == nullptr) continue;
+        add(node->value);
+    }
+
+}
+
+BinarySearchTree::BinarySearchTree(vector<int> new_elements) : BinarySearchTree() {
+
+    if(new_elements.empty()) return;
+    for(auto number : new_elements) {
+        add(number);
+    }
+
+}
+
 BinarySearchTree::~BinarySearchTree(){
 
     while(root != nullptr) {
@@ -297,12 +321,12 @@ void BinarySearchTree::add(int value){
 void BinarySearchTree::straighten(){
 
     // Wykonuje rotacje w prawo na każdym z węzłów, dopóki ma on swoich lewych potomków
-    Node* node = root;
-    while (node != nullptr){
-        if(node->left == nullptr) node = node->right;
+    Node* current_node = root;
+    while (current_node != nullptr){
+        if(current_node->left == nullptr) current_node = current_node->right;
         else {
-            rotateRight(node->value);
-            cout << node->value << endl;
+            rotateRight(current_node->value);
+            current_node = current_node->parent;
         }
     }
     
@@ -319,12 +343,22 @@ void BinarySearchTree::balance(){
     unsigned size = 0;
     getSize(root, size);
     unsigned m = pow( 2, floor(log2(size+1)) ) - 1;
-    
-    Node* node = root;
-    for(int i = m - size; node != nullptr && i > 0; i--){
-        rotateLeft(node->value);
-        node = node->right->right;
+
+    // Dopóki m>=1 wykonuję m rotacji w lewo co drugi wierzchołek zaczynając od korzenia
+    Node* current_node;
+    while (m >= 1){
+
+        current_node = root;
+        for(int i = (size == 0 ? m : size - m); i > 0; i--){
+            rotateLeft(current_node->value);
+            if(current_node->parent != nullptr) current_node = current_node->parent->right;
+        }
+
+        m = floor(m/2);
+        size = 0;
+
     }
+    
 
 }
 

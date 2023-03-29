@@ -41,7 +41,6 @@ vector<int> FileReader::readAllIntegers( string file ){
         // Jeżeli wczytaliśmy pierwszą liczbę z pliku, to zapisujemy ją jako ilośc dopuszczalnych liczb i
         // usuwamy ją z wczytanego wektora (nie jest ona przeznaczona do wczytania)
         if(amount == -1){
-            cout << "wielkosc " << line_integers.size() << endl;
             amount = line_integers.front();
             line_integers.pop_front();
         }

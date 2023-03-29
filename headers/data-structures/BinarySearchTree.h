@@ -33,6 +33,12 @@ class BinarySearchTree{
     // Konstruktor
     public: BinarySearchTree();
 
+    // Konstruktor kopiujący
+    public: BinarySearchTree(BinarySearchTree* to_copy);
+
+    // Konstruktor pobierający ciąg liczb
+    public: BinarySearchTree(vector<int> new_elements);
+
     // Destruktor
     public: ~BinarySearchTree();
 
@@ -86,5 +92,7 @@ enum BSTACtions{
     REMOVE_BST,
     ROTATE_LEFT,
     ROTATE_RIGHT,
-    BALANCE
+    FIND_BST,
+    BALANCE,
+    LOAD_BST
 };

@@ -1,5 +1,6 @@
 #include "app/modules/BSTModule.h"
 #include "app/utility/Console.h"
+#include "app/utility/FileReader.h"
 
 BSTModule::BSTModule() : Module("DRZEWO WYSZUKIWAN BINARNYCH") {
 
@@ -10,7 +11,9 @@ BSTModule::BSTModule() : Module("DRZEWO WYSZUKIWAN BINARNYCH") {
     menu->addOption(BSTACtions::REMOVE_BST, "Usun element z drzewa");
     menu->addOption(BSTACtions::ROTATE_LEFT, "Rotacja w lewo wzgledem wezla");
     menu->addOption(BSTACtions::ROTATE_RIGHT, "Rotacja w prawo wzgledem wezla");
+    menu->addOption(BSTACtions::FIND_BST, "Znajdz element w drzewie");
     menu->addOption(BSTACtions::BALANCE, "Zrownowaz drzewo");
+    menu->addOption(BSTACtions::LOAD_BST, "Wczytaj dane z pliku");
 
 }
 
@@ -37,7 +40,7 @@ void BSTModule::loop(){
             delete previous_state;
             previous_state = nullptr;
         }
-        previous_state = new BinarySearchTree();
+        previous_state = new BinarySearchTree(tree);
 
         cout << "OBECNY STAN DRZEWA:\n";
         tree->print();
@@ -60,8 +63,14 @@ void BSTModule::loop(){
             // Rotacja w prawo
             case BSTACtions::ROTATE_RIGHT: rotateRight(); break;
 
+            // Wyszukanie lementu
+            case BSTACtions::FIND_BST: find(); break;
+
             // Równoważanie drzewa
             case BSTACtions::BALANCE: balance(); break;
+
+            // Wczytanie z pliku
+            case BSTACtions::LOAD_BST: load(); break;
 
             // Nieznana opcja
             default: Console::waitForUserResponse(); break;
@@ -121,5 +130,26 @@ void BSTModule::add(){
 void BSTModule::balance(){
 
     tree->balance();
+
+}
+
+void BSTModule::find(){
+
+    try{
+        tree->find(Console::getIntInput(INSERT_ELEMENT_VALUE));
+    } catch(invalid_argument e){
+        cout << e.what() << endl;
+    }
+    Console::waitForUserResponse();
+
+}
+
+void BSTModule::load(){
+
+    if(tree != nullptr){
+        delete tree;
+        tree = nullptr;
+    }
+    tree = new BinarySearchTree(FileReader::readAllIntegers(Console::getInput(INSERT_PATH)));
 
 }

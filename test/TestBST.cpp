@@ -1232,6 +1232,112 @@ TEST(Remove, RemoveParentWithBothChildren){
 
 }
 
+TEST(Balance, BalanceTree){
+
+    BinarySearchTree tree;
+    Node* node;
+    tree.add(45);
+    tree.add(21);
+    tree.add(145);
+    tree.add(1);
+    tree.add(22);
+    tree.add(18);
+    tree.add(28);
+    tree.add(82);
+    tree.balance();
+
+    // 28
+    node = tree.find(28);
+    ASSERT_NE(node, nullptr);           // wierzchołek
+    ASSERT_EQ(node->value, 28);
+    
+    ASSERT_NE(node->left, nullptr) ;    // lewy
+    ASSERT_EQ(node->left->value, 21);   
+
+    ASSERT_NE(node->right, nullptr);    // prawy
+    ASSERT_EQ(node->right->value, 82);
+
+    ASSERT_EQ(node->parent, nullptr);   // rodzic
+
+    // 21
+    node = tree.find(21);
+    ASSERT_NE(node, nullptr);           // wierzchołek
+    ASSERT_EQ(node->value, 21);
+    
+    ASSERT_NE(node->left, nullptr) ;    // lewy
+    ASSERT_EQ(node->left->value, 18);   
+
+    ASSERT_NE(node->right, nullptr);    // prawy
+    ASSERT_EQ(node->right->value, 22);
+
+    ASSERT_NE(node->parent, nullptr);   // rodzic
+    ASSERT_EQ(node->parent->value, 28);
+
+    // 82
+    node = tree.find(82);
+    ASSERT_NE(node, nullptr);           // wierzchołek
+    ASSERT_EQ(node->value, 82);
+    
+    ASSERT_NE(node->left, nullptr) ;    // lewy
+    ASSERT_EQ(node->left->value, 45);   
+
+    ASSERT_NE(node->right, nullptr);    // prawy
+    ASSERT_EQ(node->right->value, 145);
+
+    ASSERT_NE(node->parent, nullptr);   // rodzic
+    ASSERT_EQ(node->parent->value, 28);
+
+    // 18
+    node = tree.find(18);
+    ASSERT_NE(node, nullptr);           // wierzchołek
+    ASSERT_EQ(node->value, 18);
+    
+    ASSERT_NE(node->left, nullptr) ;    // lewy
+    ASSERT_EQ(node->left->value, 1);   
+
+    ASSERT_EQ(node->right, nullptr);    // prawy
+
+    ASSERT_NE(node->parent, nullptr);   // rodzic
+    ASSERT_EQ(node->parent->value, 21);
+
+    // 22
+    node = tree.find(22);
+    ASSERT_NE(node, nullptr);           // wierzchołek
+    ASSERT_EQ(node->value, 22);
+    
+    ASSERT_EQ(node->left, nullptr) ;    // lewy 
+
+    ASSERT_EQ(node->right, nullptr);    // prawy
+
+    ASSERT_NE(node->parent, nullptr);   // rodzic
+    ASSERT_EQ(node->parent->value, 21);
+
+    // 45
+    node = tree.find(45);
+    ASSERT_NE(node, nullptr);           // wierzchołek
+    ASSERT_EQ(node->value, 45);
+    
+    ASSERT_EQ(node->left, nullptr) ;    // lewy 
+
+    ASSERT_EQ(node->right, nullptr);    // prawy
+
+    ASSERT_NE(node->parent, nullptr);   // rodzic
+    ASSERT_EQ(node->parent->value, 82);
+
+    // 145
+    node = tree.find(145);
+    ASSERT_NE(node, nullptr);           // wierzchołek
+    ASSERT_EQ(node->value, 145);
+    
+    ASSERT_EQ(node->left, nullptr) ;    // lewy 
+
+    ASSERT_EQ(node->right, nullptr);    // prawy
+
+    ASSERT_NE(node->parent, nullptr);   // rodzic
+    ASSERT_EQ(node->parent->value, 82);
+
+}
+
 // Entry point modułu testującego klasę Arithmetic
 int main(int argc, char const *argv[])
 {

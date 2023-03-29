@@ -32,6 +32,12 @@ class BSTModule : public Module {
     // Rotacja w prawo
     private: void rotateRight();
 
+    // Wyszukanie elementu
+    private: void find();
+
+    // Wczytanie z pliku
+    private: void load();
+
     // Zrównoważenie drzewa
     private: void balance();
 
