@@ -111,6 +111,7 @@ class DynamicArray{
 
 enum ArrayActions{
     EXIT,
+    EXAMINE_ARRAY,
     PUSH_FRONT_ARRAY,
     PUSH_BACK_ARRAY,
     ADD_ARRAY,
@@ -118,5 +119,5 @@ enum ArrayActions{
     POP_BACK_ARRAY,
     REMOVE_ARRAY,
     FIND_ARRAY,
-    LOAD_DATA_ARRAY
+    LOAD_DATA_ARRAY,
 };

@@ -46,4 +46,7 @@ class ArrayModule : public Module{
     // Wczytanie danych z pliku
     private: void load();
 
+    // Przeprowadzenie eksperytmentu na tablicy
+    private: void examine();
+
 };

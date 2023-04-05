@@ -7,6 +7,7 @@ ArrayModule::ArrayModule() : Module("TABLICA DYNAMICZNA"){
     array = new DynamicArray();
 
     menu->addOption(ArrayActions::EXIT, "Powrot do menu glownego");
+    menu->addOption(ArrayActions::EXAMINE_ARRAY, "Dokonaj badan na tablicy");
     menu->addOption(ArrayActions::PUSH_FRONT_ARRAY, "Dodaj element na poczatek tablicy");
     menu->addOption(ArrayActions::PUSH_BACK_ARRAY, "Dodaj element na koniec tablicy");
     menu->addOption(ArrayActions::ADD_ARRAY, "Dodaj element na wybrana pozycje tablicy");
@@ -51,6 +52,9 @@ void ArrayModule::loop(){
         
             // Powrót do menu głównego
             case ArrayActions::EXIT: is_running = false; break;
+
+            // Przejście do trybu badania tablicy
+            case ArrayActions::EXAMINE_ARRAY: examine(); break;
 
             // Dodanie elementu na poczatek tablicy
             case ArrayActions::PUSH_FRONT_ARRAY: pushFront(); break;
@@ -172,5 +176,9 @@ void ArrayModule::load(){
         array = nullptr;
     }
     array = new DynamicArray(FileReader::readAllIntegers(Console::getInput(INSERT_PATH)));
+
+}
+
+void ArrayModule::examine(){
 
 }
