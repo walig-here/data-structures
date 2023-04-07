@@ -14,22 +14,25 @@ DynamicArray::DynamicArray(){
 
 DynamicArray::DynamicArray(DynamicArray *array) : DynamicArray() {
 
-    if(array == nullptr) return;
+    if(array == nullptr || array->length == 0) return;
+
+    length = array->length;
+    array_address = new int[length];
     for(int i = 0; i < array->length; i++)
-        push_back(array->array_address[i]);
+        array_address[i] = array->array_address[i];
 
 }
 
 DynamicArray::DynamicArray(vector<int> elements) : DynamicArray() {
 
-    // Wczytujemy dane z pliku
+    // Wczytujemy dane 
     if(elements.size() == 0) return;
 
-    
-    // Pierwszą liczbę traktujemy jako rozmiar struktury, kolejne jako wartości w niej zawarte
-    // Jeżeli rozmiar jest <=0 to przerywamy wczytywanie.
-    // Tak samo jeżeli w pliku znajduje się mniej liczb niż zadeklarowano we wczytanej wartości.
-    for(auto number : elements) push_back(number);
+    length = elements.size();
+    array_address = new int[length];
+
+    for(int i = 0; i < length; i++)
+        array_address[i] = elements[i];
 
 }
 

@@ -7,6 +7,7 @@ HeapModule::HeapModule() : Module("KOPIEC") {
     heap = new Heap();
 
     menu->addOption(HeapActions::EXIT_HEAP, "Powrot do menu glownego");
+    menu->addOption(HeapActions::EXAMINE_HEAP, "Przeprowadz badania na kopcu");
     menu->addOption(HeapActions::ADD_HEAP, "Dodaj element do kopca");
     menu->addOption(HeapActions::REMOVE_HEAP, "Usun korzen kopca");
     menu->addOption(HeapActions::FIND_HEAP, "Znajdz element w kopcu");
@@ -47,6 +48,9 @@ void HeapModule::loop(){
         
             // Powrót do menu głównego
             case HeapActions::EXIT_HEAP: is_running = false; break;
+
+            // Badania na kopcu
+            case HeapActions::EXAMINE_HEAP: examine(); break;
 
             // Dodanie elementu
             case HeapActions::ADD_HEAP: add(); break;
@@ -117,6 +121,68 @@ void HeapModule::find(){
 
     if(element == nullptr) cout << "Element nie znajduje sie w tej strukturze!" << endl;
     else  cout << "Znaleziony element: " << *element << endl;
+    Console::waitForUserResponse();
+
+}
+
+#include "examinations/HeapExamination.h"
+#include "app/utility/FileWriter.h"
+#include "app/utility/RandomNumberGenerator.h"
+#include <string>
+
+void HeapModule::examine(){
+
+    // Wczytujemy dane
+    unsigned number_of_elements[] = { 
+        0,
+        25000,
+        50000,
+        75000,
+        100000,
+        280000,
+        460000,
+        640000,
+        1000000,
+        2800000,
+        4600000,
+        6400000,
+        8200000,
+        10000000
+     };
+    string filename;
+    Console::clearScreen();
+    filename = Console::getInput("Wprowadz nazwe pliku, gdzie zostana zapisane wyniki");
+    
+
+    // Inicjujemy kopiec
+    Heap* heap;
+    vector<string> data;
+    vector<int> elements;
+    
+    // Przeprowadzamy badania
+    for(int j =0; j < 14; j++){
+        cout << "ROZMIAR: " << number_of_elements[j] << endl;
+        
+        for(int i = 0; i < 50; i++) {
+            cout << "Proba " << i+1 << "...";
+            elements = RandomNumberGenerator::getIntegers(number_of_elements[j], INT_MIN, INT_MAX);
+            heap = new Heap(elements);
+            cout << "\t";
+
+            data.push_back(HeapExamination::add_element(heap).getString()); cout << "#";
+            data.push_back(HeapExamination::remove_element(heap).getString()); cout << "#";
+            data.push_back(HeapExamination::find_element(heap).getString()); cout << "#";
+
+            delete heap;
+            cout << "\tzakonczona!\n";
+        }
+
+        FileWriter::save(data, "results/"+filename+to_string(number_of_elements[j])+".csv");
+        cout << endl;
+    }
+    
+    // Zapisujemy wyniki
+    cout << "Badanie zakonczone!" << endl;
     Console::waitForUserResponse();
 
 }

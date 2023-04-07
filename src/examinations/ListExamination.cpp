@@ -1,21 +1,21 @@
-#include "examinations/ArrayExamination.h"
+#include "examinations/ListExamination.h"
 #include "app/utility/Timer.h"
 #include "app/utility/RandomNumberGenerator.h"
 
-ExaminationRecord ArrayExamination::push_front(DynamicArray* array){
-
+ExaminationRecord ListExamination::push_front(List list){
+    
     // Generuję nowy element
     int new_element = RandomNumberGenerator::getIntegers(1, INT_MIN, INT_MAX).front();
 
     // Mierzę czas
     Timer timer;
     timer.start();
-    array->push_front(new_element);
+    list.push_front(new_element);
     timer.stop();
 
     // Zapisuje zebrane dane w formie rekordu pliku .csv
     return { 
-        ARRAY,
+        LIST,
         PUSH_FRONT,
         timer.getResult(seconds),
         timer.getResult(miliseconds),
@@ -24,7 +24,7 @@ ExaminationRecord ArrayExamination::push_front(DynamicArray* array){
 
 }
 
-ExaminationRecord ArrayExamination::push_back(DynamicArray* array){
+ExaminationRecord ListExamination::push_back(List list){
 
     // Generuję nowy element
     int new_element = RandomNumberGenerator::getIntegers(1, INT_MIN, INT_MAX).front();
@@ -32,12 +32,12 @@ ExaminationRecord ArrayExamination::push_back(DynamicArray* array){
     // Mierzę czas
     Timer timer;
     timer.start();
-    array->push_back(new_element);
+    list.push_back(new_element);
     timer.stop();
 
     // Zapisuje zebrane dane w formie rekordu pliku .csv
     return { 
-        ARRAY,
+        LIST,
         PUSH_BACK,
         timer.getResult(seconds),
         timer.getResult(miliseconds),
@@ -46,7 +46,7 @@ ExaminationRecord ArrayExamination::push_back(DynamicArray* array){
 
 }
 
-ExaminationRecord ArrayExamination::add_element(DynamicArray* array){
+ExaminationRecord ListExamination::add_element(List list){
 
     // Generuję nowy element oraz indeks
     int new_element = RandomNumberGenerator::getIntegers(1, INT_MIN, INT_MAX).front();
@@ -55,12 +55,12 @@ ExaminationRecord ArrayExamination::add_element(DynamicArray* array){
     // Mierzę czas
     Timer timer;
     timer.start();
-    array->add(new_element,index);
+    list.add(new_element,index);
     timer.stop();
 
     // Zapisuje zebrane dane w formie rekordu pliku .csv
     return { 
-        ARRAY,
+        LIST,
         ADD,
         timer.getResult(seconds),
         timer.getResult(miliseconds),
@@ -69,17 +69,17 @@ ExaminationRecord ArrayExamination::add_element(DynamicArray* array){
 
 }
 
-ExaminationRecord ArrayExamination::pop_front(DynamicArray* array){
+ExaminationRecord ListExamination::pop_front(List list){
 
     // Mierzę czas dodawnia elementu na początek
     Timer timer;
     timer.start();
-    array->pop_front();
+    list.pop_front();
     timer.stop();
 
     // Zapisuje zebrane dane w formie rekordu pliku .csv
     return { 
-        ARRAY,
+        LIST,
         POP_FRONT,
         timer.getResult(seconds),
         timer.getResult(miliseconds),
@@ -88,17 +88,17 @@ ExaminationRecord ArrayExamination::pop_front(DynamicArray* array){
 
 }
 
-ExaminationRecord ArrayExamination::pop_back(DynamicArray* array){
+ExaminationRecord ListExamination::pop_back(List list){
 
     // Mierzę czas
     Timer timer;
     timer.start();
-    array->pop_back();
+    list.pop_back();
     timer.stop();
 
     // Zapisuje zebrane dane w formie rekordu pliku .csv
     return { 
-        ARRAY,
+        LIST,
         POP_BACK,
         timer.getResult(seconds),
         timer.getResult(miliseconds),
@@ -107,20 +107,20 @@ ExaminationRecord ArrayExamination::pop_back(DynamicArray* array){
 
 }
 
-ExaminationRecord ArrayExamination::remove_element(DynamicArray* array){
+ExaminationRecord ListExamination::remove_element(List list){
 
     // Generuję indeks
-    unsigned index = RandomNumberGenerator::getIntegers(1, 0, array->getLength()).front();
+    unsigned index = RandomNumberGenerator::getIntegers(1, 0, UINT_MAX).front();
 
     // Mierzę czas
     Timer timer;
     timer.start();
-    array->remove(index);
+    list.remove(index);
     timer.stop();
 
     // Zapisuje zebrane dane w formie rekordu pliku .csv
     return { 
-        ARRAY,
+        LIST,
         REMOVE,
         timer.getResult(seconds),
         timer.getResult(miliseconds),
@@ -129,7 +129,7 @@ ExaminationRecord ArrayExamination::remove_element(DynamicArray* array){
 
 }
 
-ExaminationRecord ArrayExamination::find_element(DynamicArray* array){
+ExaminationRecord ListExamination::find_element(List list){
 
     // Generuję szukany element
     int new_element = RandomNumberGenerator::getIntegers(1, INT_MIN, INT_MAX).front();
@@ -137,12 +137,12 @@ ExaminationRecord ArrayExamination::find_element(DynamicArray* array){
     // Mierzę czas
     Timer timer;
     timer.start();
-    array->find(new_element);
+    list.find(new_element);
     timer.stop();
 
     // Zapisuje zebrane dane w formie rekordu pliku .csv
     return { 
-        ARRAY,
+        LIST,
         FIND,
         timer.getResult(seconds),
         timer.getResult(miliseconds),

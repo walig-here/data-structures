@@ -32,4 +32,7 @@ class HeapModule : public Module {
     // Pobranie watości
     private: void find();
 
+    // Przebadanie kopca
+    private: void examine();
+
 };

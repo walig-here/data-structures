@@ -5,10 +5,10 @@ using namespace std;
 
 // Typy modułów
 enum ModuleTypes{
-    LIST,
-    ARRAY,
-    HEAP,
-    BST
+    LIST_MODULE,
+    ARRAY_MODULE,
+    HEAP_MODULE,
+    BST_MODULE
 };
 
 // Klasa służąca do obługi modułów aplikacji

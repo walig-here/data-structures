@@ -53,4 +53,7 @@ class ListModule : virtual public Module{
     // Wczytanie danych
     private: void load();
 
+    // Badania
+    private: void examine();
+
 };

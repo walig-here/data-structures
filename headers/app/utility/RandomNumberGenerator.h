@@ -16,7 +16,7 @@ class RandomNumberGenerator{
     private: ~RandomNumberGenerator() {};
 
     // Generuje zadaną ilość losowych liczb całkowitych z zadanego zakresu
-    public: static list<int> getIntegers(long long unsigned count, long long int min, long long int max);
+    public: static vector<int> getIntegers(long long unsigned count, long long int min, long long int max);
 
     // Generuje i zapisuje zadaną ilość losowych liczb całkowitych z zadanego zakresu, a nastepnie
     // zapisuje je do pliku

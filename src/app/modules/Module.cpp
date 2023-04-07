@@ -14,16 +14,16 @@ void Module::start(ModuleTypes module_type){
     Module* module;
     switch (module_type){
         // Moduł listy dwukierunkowej
-        case ModuleTypes::LIST: module = new ListModule(); break;
+        case ModuleTypes::LIST_MODULE: module = new ListModule(); break;
         
         // Moduł tablicy dynamicznej
-        case ModuleTypes::ARRAY: module = new ArrayModule(); break;
+        case ModuleTypes::ARRAY_MODULE: module = new ArrayModule(); break;
 
         // Moduł kopca
-        case ModuleTypes::HEAP: module = new HeapModule(); break;
+        case ModuleTypes::HEAP_MODULE: module = new HeapModule(); break;
 
         // Moduł drzewa BST
-        case ModuleTypes::BST: module = new BSTModule(); break;
+        case ModuleTypes::BST_MODULE: module = new BSTModule(); break;
     }
     
     module->loop();

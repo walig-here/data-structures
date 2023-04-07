@@ -177,7 +177,7 @@ TEST(RotateRight, RotateNodeNotExist){
     tree.add(28);
     tree.add(18);
     tree.add(82);
-    tree.rotateRight(-5);
+    tree.rotateRight(tree.find(-5));
 
     // Nic nie powinno się zmienić
     // 45
@@ -292,7 +292,7 @@ TEST(RotateRight, RotateNodeExist){
     tree.add(28);
     tree.add(18);
     tree.add(82);
-    tree.rotateRight(21);
+    tree.rotateRight(tree.find(21));
 
     // Nic nie powinno się zmienić
     // 45
@@ -409,7 +409,7 @@ TEST(RotateLeft, RotateNodeExist){
     tree.add(28);
     tree.add(18);
     tree.add(82);
-    tree.rotateLeft(45);
+    tree.rotateLeft(tree.find(45));
 
     // 45
     Node* node = tree.find(45);
@@ -526,7 +526,7 @@ TEST(RotateLeft, RotateNodeNotExist){
     tree.add(28);
     tree.add(18);
     tree.add(82);
-    tree.rotateLeft(-5);
+    tree.rotateLeft(tree.find(-5));
 
     // Nic nie powinno się zmienić
     // 45

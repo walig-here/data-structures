@@ -2,12 +2,13 @@
 
 Heap::Heap(){
 
+    elements = new DynamicArray();
+
 }
 
 Heap::Heap(vector<int> new_elements) : Heap() {
 
-    if(new_elements.empty()) return;
-    for(auto number : new_elements) elements.push_back(number);
+    elements = new DynamicArray(new_elements);
     buildHeapFloyd();
 
 }
@@ -15,13 +16,13 @@ Heap::Heap(vector<int> new_elements) : Heap() {
 Heap::Heap(Heap* copy) : Heap(){
 
     if(copy == nullptr) return;
-    
-    for(int i = 0; i < copy->elements.getLength(); i++)
-        elements.push_back(*(copy->elements[i]));
+    elements = new DynamicArray(copy->elements);
 
 }
 
 Heap::~Heap(){
+
+    delete elements;
 
 }
 
@@ -29,14 +30,14 @@ void Heap::print(){
 
     printf("Zawartosc kopca:\n");
 
-    if(elements.getLength() == 0){
+    if(elements->getLength() == 0){
         printf("pusty\n");
         return;
     }
 
     // Jeżeli nie jest pusty to tworzymy graf przedstawiający kopiec
-    unsigned height = 2*floor(log2(elements.getLength()))+1;
-    unsigned width = 2*pow(2, floor(log2(elements.getLength()))) - 1;
+    unsigned height = 2*floor(log2(elements->getLength()))+1;
+    unsigned width = 2*pow(2, floor(log2(elements->getLength()))) - 1;
     
     int p = width+1;
     int already_printed = 0;
@@ -51,12 +52,12 @@ void Heap::print(){
         for(int x = 1; x <= width; x++){
 
             if(x%p == p/2) {
-                printf("%4d", *(elements[already_printed]));
+                printf("%4d", *((*elements)[already_printed]));
                 already_printed++;
             }
             else printf("    ");
 
-            if(already_printed == elements.getLength()){
+            if(already_printed == elements->getLength()){
                 printf("\n\n");
                 return;
             }
@@ -74,8 +75,8 @@ bool Heap::pop_root(){
 
     // Kopiuje wartośc ostatniego elementu na pierwszą pozycję, usuwam ostatni elementu
     // Następnie naprawiam kopiec w dół
-    *root() = *(elements[elements.getLength()-1]);
-    elements.pop_back();
+    *root() = *((*elements)[elements->getLength()-1]);
+    elements->pop_back();
     repairDownwards(0);
     return true;
 
@@ -83,16 +84,18 @@ bool Heap::pop_root(){
 
 int* Heap::find(int value){
 
+    if(root() == nullptr) return nullptr;
+
     // Jeżeli szukany element jest większy korzenia to na pewno nie występuje w kopcu
     if(value > *root()) return nullptr;
-    return elements.find(value);
+    return elements->find(value);
 
 }
 
 void Heap::add(int new_element){
 
-    elements.push_back(new_element);
-    repairUpwards(elements.getLength()-1);
+    elements->push_back(new_element);
+    repairUpwards(elements->getLength()-1);
 
 }
 
@@ -124,11 +127,11 @@ void Heap::repairUpwards(unsigned node_index){
     // Jeżeli nie, to naprawę można zakończyć, gdyż warunek kopca jest na pewno spełniony
     if( node_index != getMaxChildIndex(PARENT_INDEX(node_index)) ) return;
 
-    int* current_node = elements[node_index];
-    int* parent = elements[PARENT_INDEX(node_index)];
+    int* current_node = (*elements)[node_index];
+    int* parent = (*elements)[PARENT_INDEX(node_index)];
     if(*parent >= *current_node) return;
 
-    elements.swap(node_index, PARENT_INDEX(node_index));
+    elements->swap(node_index, PARENT_INDEX(node_index));
     repairUpwards(PARENT_INDEX(node_index));
 
 }
@@ -139,13 +142,13 @@ void Heap::repairDownwards(unsigned current_index){
     // Jeżeli wierzchołek okaże się liściem (nie ma potomków) kończę naprawę
     int max_index = getMaxChildIndex(current_index);
     if(max_index == IS_LEAF) return;
-    int* max = elements[max_index];
-    int* current_node = elements[current_index];
+    int* max = (*elements)[max_index];
+    int* current_node = (*elements)[current_index];
     
     // Zamieniam miejscami rodzica z maksymalnym potomkiem, jeżeli zaburzony jest warunek kopca 
     // Kontynuuje naprawe kopca
     if( *max <= *current_node) return;
-    elements.swap(max_index, current_index);
+    elements->swap(max_index, current_index);
     repairDownwards(max_index);
 
 }
@@ -153,12 +156,12 @@ void Heap::repairDownwards(unsigned current_index){
 void Heap::buildHeapFloyd(){
 
     // Pustego nie naprawiam
-    if(elements.getLength() == 0) return;
+    if(elements->getLength() == 0) return;
 
     // Wybieram kolejnych rodziców i zamieniam miejscami z dziećmi, jeżeli nie jest spełniony warunek kopca
     int left_child;
     int right_child;
-    for(int i = (elements.getLength()-1)/2; i >= 0; i--) {
+    for(int i = (elements->getLength()-1)/2; i >= 0; i--) {
         repairDownwards(i);
     }
 

@@ -11,36 +11,36 @@ namespace ArrayExamination{
     /**
      * Zbadanie dodawania elementu na początek tablicy
      */
-    ExaminationRecord push_front(DynamicArray array, string filename);
+    ExaminationRecord push_front(DynamicArray* array);
 
     /**
      * Zbadanie dodawania elementu na koniec tablicy
     */
-    double push_back(DynamicArray array, string filename);
+    ExaminationRecord push_back(DynamicArray* array);
 
    /**
     * Zbadanie dodawania elemntu na dowolny indeks tablcicy
    */
-    double add_element(DynamicArray array, string filename);
+    ExaminationRecord add_element(DynamicArray* array);
 
     /**
      * Zbadanie usuwania elementu z początku tablicy
     */
-   double pop_front(DynamicArray array, string filename);
+   ExaminationRecord pop_front(DynamicArray* array);
 
    /**
     * Zbadanie usuwania elementu z końca tablicy
    */
-    double pop_back(DynamicArray array, string filename);
+    ExaminationRecord pop_back(DynamicArray* array);
 
     /**
      * Zbadania usuwanie elementu z dowolnej pozycji
     */
-   double remove_element(DynamicArray array, string filename);
+   ExaminationRecord remove_element(DynamicArray* array);
 
    /**
     * Zbadanie wyszukiwania elementu na dowolnej pozycji
    */
-    double find_element(DynamicArray array, string filename);
+    ExaminationRecord find_element(DynamicArray* array);
 
 } 

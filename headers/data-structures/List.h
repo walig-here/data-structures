@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <vector>
 
@@ -150,16 +151,17 @@ class List{
 
 // Zbiór działań możliwych do wykonania na liście
 enum ListActions{
-    BACK,
-    SWAP,
-    HEAD,
-    TAIL,
-    PUSH_FRONT,
-    PUSH_BACK,
-    ADD,
-    POP_FRONT,
-    POP_BACK,
-    REMOVE,
-    FIND,
-    LOAD_DATA
+    EXIT_LIST,
+    EXAMINE_LIST,
+    SWAP_LIST,
+    HEAD_LIST,
+    TAIL_LIST,
+    PUSH_FRONT_LIST,
+    PUSH_BACK_LIST,
+    ADD_LIST,
+    POP_FRONT_LIST,
+    POP_BACK_LIST,
+    REMOVE_LIST,
+    FIND_LIST,
+    LOAD_DATA_LIST
 };

@@ -1,3 +1,4 @@
+#pragma once
 #include <vector>
 
 using namespace std;
@@ -55,10 +56,10 @@ class BinarySearchTree{
     public: void remove(int value);
 
     // Rotacja w prawo
-    public: void rotateRight(int value);
+    public: void rotateRight(Node* node);
 
     // Rotacja w lewo
-    public: void rotateLeft(int value);
+    public: void rotateLeft(Node* node);
 
     // Równoważenie drzewa
     public: void balance();
@@ -79,7 +80,7 @@ class BinarySearchTree{
     public: Node* getSuccessor(Node* node);
 
     // Prostuje drzewo
-    private: void straighten();
+    private: unsigned straighten();
 
     // Zlicza ilość wierzchołków drzewa o zadanym korzeniu
     public: void getSize(Node* root, unsigned& tree_size);
@@ -88,11 +89,12 @@ class BinarySearchTree{
 
 enum BSTACtions{
     EXIT_BST,
+    EXAMINE_BST,
     ADD_BST,
     REMOVE_BST,
     ROTATE_LEFT,
     ROTATE_RIGHT,
     FIND_BST,
-    BALANCE,
+    BALANCE_BST,
     LOAD_BST
 };

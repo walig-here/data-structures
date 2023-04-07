@@ -41,4 +41,7 @@ class BSTModule : public Module {
     // Zrównoważenie drzewa
     private: void balance();
 
+    // Przebadanie drzewa
+    private: void examine();
+
 };

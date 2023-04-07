@@ -142,11 +142,10 @@ void BinarySearchTree::print(){
 
 }
 
-void BinarySearchTree::rotateRight(int value){
+void BinarySearchTree::rotateRight(Node* node){
 
     // Znaduję wierzchołek względem którego obracamy
     // Jeżeli nie istnieje lub nie ma lewego potomka to nie obracam
-    Node* node = find(value);
     if(node == nullptr || node->left == nullptr) return;
     Node* left_tree_root = node->left;
 
@@ -168,11 +167,10 @@ void BinarySearchTree::rotateRight(int value){
 
 }
 
-void BinarySearchTree::rotateLeft(int value){
+void BinarySearchTree::rotateLeft(Node* node){
 
     // Znaduję wierzchołek względem którego obracamy
     // Jeżeli nie istnieje lub nie ma prawego potomka to nie obracam
-    Node* node = find(value);
     if(node == nullptr || node->right == nullptr) return;
     Node* right_tree_root = node->right;
 
@@ -212,49 +210,43 @@ void BinarySearchTree::remove(int value){
     Node* node = find(value);
     if(node == nullptr) return;
 
-    // Jeżeli węzeł istnieje, to:
-    // Gdy jest liściem, to po prostu odłączam go od drzewa i usuwam
-    // Gdy ma jednego potomka, to w miejsce węzła wstawiam jego potomka
-    // Gdy ma dwóch potomków, to kopiuje wartość następnika, a następnik usuwam
-    if(node->left == nullptr && node->right == nullptr){
-
-        Node* parent = node->parent;
-        if(parent == nullptr) {
-            delete root;
-            root = nullptr;
-            return;
+    // Jeżeli węzeł ma jakichkolwiek potomków, to de facto należy usunąć jego następnik
+    // Jednocześnie klucz z następnika należy przekopiować do usuwanego węzła
+    if(node->left != nullptr || node->right != nullptr){
+        Node* succesor = getSuccessor(node);
+        if(succesor != nullptr){
+            node->value = succesor->value;
+            node = succesor;
         }
+    }
 
-        if(parent->left == node) parent->left = nullptr;
-        else parent->right = nullptr;
+    // W tym momencie węzeł może być już wyłącznie liściem lub mieć jednego potomka
+    // Jeżeli jest liściem, to po prostu odłączamy go od drzewa, przy czym gdy był to korzeń, to drzewo staje się puste
+    if(node->left == nullptr && node->right == nullptr){
+        Node* node_parent = node->parent;
+
+        if(node_parent != nullptr && node_parent->left == node) node_parent->left = nullptr;
+        else if(node_parent != nullptr) node_parent->right = nullptr;
+        else root = nullptr;
+
         delete node;
         return;
-
     }
 
-    if(node->left != nullptr && node->right != nullptr){
-
-        Node* successor = getSuccessor(node);
-        int successor_value = successor->value;
-        remove(successor_value);
-        node->value = successor_value;
-        return;
-
-    }
-
+    // Jeżeli ma jednego potomka, to przepinamy potomka do rodzica usuwanego elementu i usuwamy element
+    // Jeżeli jednak usuwany element był korzeniem, to potomek staje się nowym korzeniem 
     Node* child;
+    Node* parent = node->parent;
     if(node->left != nullptr) child = node->left;
     else child = node->right;
-    child->parent = node->parent;
-    if(node->parent == nullptr) {
-        delete root;
-        root = child;
-        return;
-    }
-    if(node->parent->left == node) node->parent->left = child;
-    else node->parent->right = child;
-    delete node;
 
+    if(parent != nullptr && parent->left == node) parent->left = child;
+    else if(parent != nullptr) parent->right = child;
+    else root = child;
+
+    child->parent = parent;
+
+    delete node;
 }
 
 Node* BinarySearchTree::minNode(Node* root){
@@ -318,30 +310,31 @@ void BinarySearchTree::add(int value){
 
 }
 
-void BinarySearchTree::straighten(){
+unsigned BinarySearchTree::straighten(){
 
     // Wykonuje rotacje w prawo na każdym z węzłów, dopóki ma on swoich lewych potomków
     Node* current_node = root;
+    unsigned size = 0;
     while (current_node != nullptr){
-        if(current_node->left == nullptr) current_node = current_node->right;
+        if(current_node->left == nullptr) {
+            current_node = current_node->right;
+            size++;
+        }
         else {
-            rotateRight(current_node->value);
+            rotateRight(current_node);
             current_node = current_node->parent;
         }
     }
-    
-
+    return size;
 }
 
 void BinarySearchTree::balance(){
 
     // Etap I - prostowanie
-    straighten();
+    unsigned size = straighten();
 
     // Etap II - równoważenie
     // Wynonuję m-n rotacji w lewo zaczynając od korzenia co drugi wierzchołek
-    unsigned size = 0;
-    getSize(root, size);
     unsigned m = pow( 2, floor(log2(size+1)) ) - 1;
 
     // Dopóki m>=1 wykonuję m rotacji w lewo co drugi wierzchołek zaczynając od korzenia
@@ -350,7 +343,7 @@ void BinarySearchTree::balance(){
 
         current_node = root;
         for(int i = (size == 0 ? m : size - m); i > 0; i--){
-            rotateLeft(current_node->value);
+            rotateLeft(current_node);
             if(current_node->parent != nullptr) current_node = current_node->parent->right;
         }
 

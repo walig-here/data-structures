@@ -1,8 +1,6 @@
 #include "app/modules/ListModule.h"
 #include "app/utility/Console.h"
 #include "app/modules/ListModule.h"
-#include "app/utility/RandomNumberGenerator.h"
-#include "app/utility/Timer.h"
 #include "app/utility/FileReader.h"
 
 #include <list>
@@ -34,40 +32,43 @@ void ListModule::loop(){
 
         switch(menu->getUserChoice()){
             // Powrot do menu
-            case ListActions::BACK: is_running = false; break;
+            case ListActions::EXIT_LIST: is_running = false; break;
+
+            // Przeprowadz badania na liscie
+            case ListActions::EXAMINE_LIST: examine(); break;
 
             // Zmiana kierunku wyświetlania
-            case ListActions::SWAP: list->swap(); break;
+            case ListActions::SWAP_LIST: list->swap(); break;
 
             // Dodanie elementu na początek
-            case ListActions::PUSH_FRONT: pushFront(); break;
+            case ListActions::PUSH_FRONT_LIST: pushFront(); break;
 
             // Dodanie elementu na koniec listy
-            case ListActions::PUSH_BACK: pushBack(); break;    
+            case ListActions::PUSH_BACK_LIST: pushBack(); break;    
 
             // Dodanie elementu w dowolne miejsce
-            case ListActions::ADD: add(); break;
+            case ListActions::ADD_LIST: add(); break;
 
             // Pobierz głowę
-            case ListActions::HEAD: head(); break;
+            case ListActions::HEAD_LIST: head(); break;
 
             // Pobierz ogon
-            case ListActions::TAIL: tail(); break;
+            case ListActions::TAIL_LIST: tail(); break;
 
             // Wyszukanie elementu
-            case ListActions::FIND: find(); break;
+            case ListActions::FIND_LIST: find(); break;
 
             // Usunięcie elementu z głowy
-            case ListActions::POP_FRONT: pop_front(); break;
+            case ListActions::POP_FRONT_LIST: pop_front(); break;
 
             // Usunięcie elementu z ogona
-            case ListActions::POP_BACK: pop_back(); break;
+            case ListActions::POP_BACK_LIST: pop_back(); break;
 
             // Usunięcie elementu z dowolnego miejsca listy
-            case ListActions::REMOVE: remove(); break;
+            case ListActions::REMOVE_LIST: remove(); break;
 
             // Wczytanie z pliku
-            case ListActions::LOAD_DATA: load(); break;
+            case ListActions::LOAD_DATA_LIST: load(); break;
 
             // Nieznana opcja
             default: Console::waitForUserResponse(); break;
@@ -86,18 +87,19 @@ ListModule::ListModule() : Module("LISTA DWUKIERUNKOWA"){
 
     list = new List();
 
-    menu->addOption(ListActions::BACK, "Powrot do menu glownego");
-    menu->addOption(ListActions::SWAP, "Zmien kierunek wyswietlania");
-    menu->addOption(ListActions::HEAD, "Pobierz glowe listy");
-    menu->addOption(ListActions::TAIL, "Pobierz ogon listy");
-    menu->addOption(ListActions::PUSH_FRONT, "Dodaj element na poczatek listy");
-    menu->addOption(ListActions::PUSH_BACK, "Dodaj element na koniec listy");
-    menu->addOption(ListActions::ADD, "Dodaj element w dowolne miejsce listy");
-    menu->addOption(ListActions::POP_FRONT, "Usun element z poczatku listy");
-    menu->addOption(ListActions::POP_BACK, "Usun element z konca listy");
-    menu->addOption(ListActions::REMOVE, "Usun element z dowolnego miejsca listy");
-    menu->addOption(ListActions::FIND, "Wyszukaj element w liscie");
-    menu->addOption(ListActions::LOAD_DATA, "Wczytaj dane z pliku");
+    menu->addOption(ListActions::EXIT_LIST, "Powrot do menu glownego");
+    menu->addOption(ListActions::EXAMINE_LIST, "Przeprowadz badania na liscie");
+    menu->addOption(ListActions::SWAP_LIST, "Zmien kierunek wyswietlania");
+    menu->addOption(ListActions::HEAD_LIST, "Pobierz glowe listy");
+    menu->addOption(ListActions::TAIL_LIST, "Pobierz ogon listy");
+    menu->addOption(ListActions::PUSH_FRONT_LIST, "Dodaj element na poczatek listy");
+    menu->addOption(ListActions::PUSH_BACK_LIST, "Dodaj element na koniec listy");
+    menu->addOption(ListActions::ADD_LIST, "Dodaj element w dowolne miejsce listy");
+    menu->addOption(ListActions::POP_FRONT_LIST, "Usun element z poczatku listy");
+    menu->addOption(ListActions::POP_BACK_LIST, "Usun element z konca listy");
+    menu->addOption(ListActions::REMOVE_LIST, "Usun element z dowolnego miejsca listy");
+    menu->addOption(ListActions::FIND_LIST, "Wyszukaj element w liscie");
+    menu->addOption(ListActions::LOAD_DATA_LIST, "Wczytaj dane z pliku");
 
 }
 
@@ -212,5 +214,72 @@ void ListModule::load(){
     }
     list = new List(FileReader::readAllIntegers(Console::getInput(INSERT_PATH)));
     if(list->front() == nullptr) Console::waitForUserResponse();
+
+}
+
+#include "examinations/ListExamination.h"
+#include "app/utility/FileWriter.h"
+#include "app/utility/RandomNumberGenerator.h"
+#include <string>
+
+void ListModule::examine(){
+
+    // Wczytujemy dane
+    unsigned number_of_elements[] = { 
+        0,
+        25000,
+        50000,
+        75000,
+        100000,
+        280000,
+        460000,
+        640000,
+        1000000,
+        2800000,
+        4600000,
+        6400000,
+        8200000,
+        10000000
+     };
+    string filename;
+    Console::clearScreen();
+    filename = Console::getInput("Wprowadz nazwe pliku, gdzie zostana zapisane wyniki");
+    
+
+    // Inicjujemy tablicę
+    List* list;
+    vector<string> data;
+    vector<int> elements;
+    
+    // Przeprowadzamy badania
+    for(int j = 0; j < 14; j++){
+        cout << "ROZMIAR: " << number_of_elements[j] << endl;
+        
+        for(int i = 0; i < 50; i++) {
+            cout << "Proba " << i+1 << "...";
+            elements = RandomNumberGenerator::getIntegers(number_of_elements[j], INT_MIN, INT_MAX);
+            list = new List(elements);
+            cout << "\t";
+
+            data.push_back(ListExamination::push_front(list).getString()); cout << "#";
+            data.push_back(ListExamination::push_back(list).getString()); cout << "#";
+            data.push_back(ListExamination::add_element(list).getString()); cout << "#";
+            data.push_back(ListExamination::pop_front(list).getString()); cout << "#";
+            data.push_back(ListExamination::pop_back(list).getString()); cout << "#";
+            data.push_back(ListExamination::remove_element(list).getString()); cout << "#";
+            data.push_back(ListExamination::find_element(list).getString()); cout << "#";
+
+            delete list;
+            cout << "\tzakonczona!\n";
+        }
+        
+        FileWriter::save(data, "results/"+filename+to_string(number_of_elements[j])+".csv");
+        cout << endl;
+    }
+    
+    // Zapisujemy wyniki
+    FileWriter::save(data, "results/"+filename+".csv");
+    cout << "Badanie zakonczone!" << endl;
+    Console::waitForUserResponse();
 
 }

@@ -2,7 +2,7 @@
 
 #include <fstream>
 
-bool FileWriter::saveInt(list<int> integers, string file_name){
+bool FileWriter::saveInt(vector<int> integers, string file_name){
 
     // Próbujemy stworzyć plik, do którego zapiszemy nasze liczby
     fstream file;
@@ -21,7 +21,7 @@ bool FileWriter::saveInt(list<int> integers, string file_name){
     return true;
 }
 
-bool FileWriter::save(list<string> lines, string file_name){
+bool FileWriter::save(vector<string> lines, string file_name){
 
     // Próbujemy stworzyć plik, do którego zapiszemy nasze liczby
     fstream file;

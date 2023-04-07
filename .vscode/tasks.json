@@ -9,11 +9,13 @@
                 "-I",
                 "${workspaceFolder}\\headers",
                 "${workspaceFolder}\\src\\data-structures\\*.cpp",
+                "${workspaceFolder}\\src\\examinations\\*.cpp",
                 "${workspaceFolder}\\src\\*.cpp",
                 "${workspaceFolder}\\src\\app\\modules\\*.cpp",
                 "${workspaceFolder}\\src\\app\\utility\\*.cpp",
                 "-o",
-                "${workspaceFolder}\\out\\sdizo-projekt-1"
+                "${workspaceFolder}\\out\\sdizo-projekt-1-debug",
+                "-O3"
             ],
             "options": {
                 "cwd": "${fileDirname}"

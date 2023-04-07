@@ -5,7 +5,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}\\out\\sdizo-projekt-1.exe",
+            "program": "${workspaceFolder}\\out\\sdizo-projekt-1-debug.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

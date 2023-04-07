@@ -179,6 +179,88 @@ void ArrayModule::load(){
 
 }
 
+#include "examinations/ArrayExamination.h"
+#include "app/utility/FileWriter.h"
+#include "app/utility/RandomNumberGenerator.h"
+#include <string>
+
 void ArrayModule::examine(){
+
+    // Wczytujemy dane
+    unsigned number_of_elements[] = { 
+        0,
+        25000,
+        50000,
+        75000,
+        100000,
+        280000,
+        460000,
+        640000,
+        1000000,
+        2800000,
+        4600000,
+        6400000,
+        8200000,
+        10000000
+     };
+    string filename;
+    Console::clearScreen();
+    filename = Console::getInput("Wprowadz nazwe pliku, gdzie zostana zapisane wyniki");
+    
+
+    // Inicjujemy tablicę
+    DynamicArray* array;
+    vector<string> data;
+    vector<int> elements;
+    
+    // Przeprowadzamy badania
+    for(int j =0; j < 14; j++){
+        cout << "ROZMIAR: " << number_of_elements[j] << endl;
+
+        cout << endl;
+        for(int i = 0; i < 50; i++) {
+            cout << "Proba " << i+1 << "...";
+            elements = RandomNumberGenerator::getIntegers(number_of_elements[j], INT_MIN, INT_MAX);
+            cout << "\t";
+
+            array = new DynamicArray(elements);
+            data.push_back(ArrayExamination::push_front(array).getString()); cout << "#";
+            delete array;
+
+            array = new DynamicArray(elements);
+            data.push_back(ArrayExamination::push_back(array).getString()); cout << "#";
+            delete array;
+
+            array = new DynamicArray(elements);
+            data.push_back(ArrayExamination::add_element(array).getString()); cout << "#";
+            delete array;
+
+            array = new DynamicArray(elements);
+            data.push_back(ArrayExamination::pop_front(array).getString()); cout << "#";
+            delete array;
+
+            array = new DynamicArray(elements);
+            data.push_back(ArrayExamination::pop_back(array).getString()); cout << "#";
+            delete array;
+
+            array = new DynamicArray(elements);
+            data.push_back(ArrayExamination::remove_element(array).getString()); cout << "#";
+            delete array;
+
+            array = new DynamicArray(elements);
+            data.push_back(ArrayExamination::find_element(array).getString()); cout << "#";
+            delete array;
+
+            
+            cout << "\tzakonczona!\n";
+        }
+
+        FileWriter::save(data, "results/"+filename+to_string(number_of_elements[j])+".csv");
+        cout << endl;
+    }
+    
+    // Zapisujemy wyniki
+    cout << "Badanie zakonczone!" << endl;
+    Console::waitForUserResponse();
 
 }

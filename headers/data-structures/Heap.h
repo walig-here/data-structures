@@ -6,7 +6,7 @@
 class Heap{
 
     /* POLA */
-    private: DynamicArray elements;     // implementacja kopca w formie tablicy
+    private: DynamicArray* elements;     // implementacja kopca w formie tablicy
 
     /* METODY */
 
@@ -99,7 +99,7 @@ class Heap{
     // Adres lewego potomka elementu o indeksie index lub nullptr, gdy lewy
     // potomek nie istnieje.
     //-----------------------------------------------------------------------
-    private: int* getLeftChild(unsigned index) { return elements[LEFT_CHILD_INDEX(index)]; }
+    private: int* getLeftChild(unsigned index) { return (*elements)[LEFT_CHILD_INDEX(index)]; }
 
     
     #define RIGHT_CHILD_INDEX(i) (2 * i + 2)  
@@ -114,7 +114,7 @@ class Heap{
     // Adres prawego potomka elementu o indeksie index lub nullptr, gdy prawy
     // potomek nie istnieje.
     //-----------------------------------------------------------------------
-    private: int* getRightChild(unsigned index) { return elements[RIGHT_CHILD_INDEX(index)]; }
+    private: int* getRightChild(unsigned index) { return (*elements)[RIGHT_CHILD_INDEX(index)]; }
 
 
     #define PARENT_INDEX(i) ( floor( (i - 1)/2 ) )
@@ -129,7 +129,7 @@ class Heap{
     // Adres rodzica elementu o indeksie index lub nullptr, gdy element jest
     // korzeniem.
     //-----------------------------------------------------------------------
-    private: int* getParent(unsigned index) { return elements[PARENT_INDEX(index)]; };
+    private: int* getParent(unsigned index) { return (*elements)[PARENT_INDEX(index)]; };
 
 
     //-----------------------------------------------------------------------
@@ -185,12 +185,13 @@ class Heap{
     // Adres elementu, będącego korzeniem kopca lub nullptr, gdy kopiec jest
     // pusty.
     //-----------------------------------------------------------------------
-    public: int* root() { return elements[0]; }
+    public: int* root() { return (*elements)[0]; }
 
 };
 
 enum HeapActions{
     EXIT_HEAP,
+    EXAMINE_HEAP,
     ADD_HEAP,
     REMOVE_HEAP,
     FIND_HEAP,

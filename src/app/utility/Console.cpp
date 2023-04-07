@@ -24,7 +24,7 @@ void Console::waitForUserResponse(){
 
     fflush(stdin);
     printf("Wcisnij dowolny klawisz, aby kontynuowac...");
-    getchar(); getchar();
+    getchar();
 
 }
 

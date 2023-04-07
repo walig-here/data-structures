@@ -6,10 +6,10 @@
 // Opcje do wyboru w menu głównym
 enum MainMenuOptions{
     EXIT,
-    LIST_MODULE,
-    ARRAY_MODULE,
-    HEAP_MODULE,
-    BST_MODULE,
+    OPEN_LIST_MODULE,
+    OPEN_ARRAY_MODULE,
+    OPEN_HEAP_MODULE,
+    OPEN_BST_MODULE,
     GENERATE_RANDOM_DATA
 };
 
@@ -32,10 +32,10 @@ void mainMenu(){
 
     Menu menu("WYBOR STRUKTURY DANYCH");
     menu.addOption(MainMenuOptions::EXIT, "Zamknij program");
-    menu.addOption(MainMenuOptions::LIST_MODULE, "Lista dwukierunkowa");
-    menu.addOption(MainMenuOptions::ARRAY_MODULE, "Tablica dynamiczna");
-    menu.addOption(MainMenuOptions::HEAP_MODULE, "Kopiec");
-    menu.addOption(MainMenuOptions::BST_MODULE, "Drzewo wyszukiwan binarnych");
+    menu.addOption(MainMenuOptions::OPEN_LIST_MODULE, "Lista dwukierunkowa");
+    menu.addOption(MainMenuOptions::OPEN_ARRAY_MODULE, "Tablica dynamiczna");
+    menu.addOption(MainMenuOptions::OPEN_HEAP_MODULE, "Kopiec");
+    menu.addOption(MainMenuOptions::OPEN_BST_MODULE, "Drzewo wyszukiwan binarnych");
     menu.addOption(MainMenuOptions::GENERATE_RANDOM_DATA, "Wygeneruj plik z danymi losowymi");
 
     bool is_running = true;
@@ -48,20 +48,20 @@ void mainMenu(){
             case MainMenuOptions::EXIT: is_running = false; break;
 
             // Przejście do menu listy
-            case MainMenuOptions::LIST_MODULE: Module::start(ModuleTypes::LIST); break;
+            case MainMenuOptions::OPEN_LIST_MODULE: Module::start(ModuleTypes::LIST_MODULE); break;
 
             // Przejście do menu tablicy
-            case MainMenuOptions::ARRAY_MODULE: Module::start(ModuleTypes::ARRAY); break;
+            case MainMenuOptions::OPEN_ARRAY_MODULE: Module::start(ModuleTypes::ARRAY_MODULE); break;
 
             // Przejście do menu kopca
-            case MainMenuOptions::HEAP_MODULE: Module::start(ModuleTypes::HEAP); break;
+            case MainMenuOptions::OPEN_HEAP_MODULE: Module::start(ModuleTypes::HEAP_MODULE); break;
 
             // Przejście do menu drzewa BST
-            case MainMenuOptions::BST_MODULE: Module::start(ModuleTypes::BST); break;
+            case MainMenuOptions::OPEN_BST_MODULE: Module::start(ModuleTypes::BST_MODULE); break;
 
             // Wygenerowanie losowych danych
             case MainMenuOptions::GENERATE_RANDOM_DATA: 
-                RandomNumberGenerator::generateThenSaveIntegers("random-data.txt", 15, -1000, 1000); 
+                RandomNumberGenerator::generateThenSaveIntegers("random-data.txt", 4, -1000, 1000); 
             break;
 
             // Nieznana opcja

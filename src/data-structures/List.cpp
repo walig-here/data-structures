@@ -200,6 +200,8 @@ bool List::pop_back(){
 
 bool List::remove(unsigned wanted_index){
 
+    if(head == nullptr) return false;
+
     // Jeżeli usuwamy z pierwszej pozycji, to lepiej jest użyć pop_front()
     if(wanted_index == 0) return pop_front();
 

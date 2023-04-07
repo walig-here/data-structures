@@ -22,7 +22,11 @@ enum OperationType{
     POP_FRONT,
     POP_BACK,
     REMOVE,
-    FIND
+    REMOVE_ROOT,
+    FIND,
+    BALANCE,
+    FIND_UNBALANCED,
+    FIND_BALANCED
 };
 
 /**
