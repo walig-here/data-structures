@@ -17,8 +17,8 @@
     return { 
         BST,
         ADD,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        new_element,
+        0,
         timer.getResult(microseconds)
     };
 
@@ -35,12 +35,14 @@
     tree->remove(new_element);
     timer.stop();
 
+    bool exist = tree->find(new_element) != nullptr;
+
     // Zapisuje zebrane dane w formie rekordu pliku .csv
     return { 
         BST,
         REMOVE,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        new_element,
+        exist,
         timer.getResult(microseconds)
     };
 
@@ -57,12 +59,14 @@
     tree->find(new_element);
     timer.stop();
 
+    bool found = tree->find(new_element) != nullptr;
+
     // Zapisuje zebrane dane w formie rekordu pliku .csv
     return { 
         BST,
         FIND_UNBALANCED,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        new_element,
+        found,
         timer.getResult(microseconds)
     };
 
@@ -78,22 +82,24 @@
     timer.start();
     tree->balance();
     timer.stop();
+    bool found = tree->find(new_element) != nullptr;
     ExaminationRecord balance_record(
         BST,
         BALANCE,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        new_element,
+        found,
         timer.getResult(microseconds)
     );
     
     timer.start();
     tree->find(new_element);
     timer.stop();
+    found = tree->find(new_element) != nullptr;
     ExaminationRecord find_record(
         BST,
         FIND_BALANCED,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        new_element,
+        found,
         timer.getResult(microseconds)
     );
 

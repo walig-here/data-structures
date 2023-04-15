@@ -218,7 +218,7 @@ void ArrayModule::examine(){
         cout << "ROZMIAR: " << number_of_elements[j] << endl;
 
         cout << endl;
-        for(int i = 0; i < 50; i++) {
+        for(int i = 0; i < 30; i++) {
             cout << "Proba " << i+1 << "...";
             elements = RandomNumberGenerator::getIntegers(number_of_elements[j], INT_MIN, INT_MAX);
             cout << "\t";
@@ -256,6 +256,7 @@ void ArrayModule::examine(){
         }
 
         FileWriter::save(data, "results/"+filename+to_string(number_of_elements[j])+".csv");
+        data.clear();
         cout << endl;
     }
     

@@ -13,11 +13,15 @@ class DynamicArray{
 
     /* MEOTDY */
 
-    // Konstruktor
+    //-----------------------------------------------------------------------
+    // Konstruktor. Tworzy pustą tablicę dynamiczną.
+    //-----------------------------------------------------------------------
     public: DynamicArray();
 
 
-    // Konstruktor kopiujący
+    //-----------------------------------------------------------------------
+    // Konstruktor kopiujący.
+    //-----------------------------------------------------------------------
     public: DynamicArray(DynamicArray* array);
 
     //-----------------------------------------------------------------------
@@ -29,7 +33,9 @@ class DynamicArray{
     public: DynamicArray(vector<int> elements);
 
 
-    // Destruktor
+    //-----------------------------------------------------------------------
+    // Destruktor. Zwalnia pamięć po tablicy dynamicznej.
+    //-----------------------------------------------------------------------
     public: ~DynamicArray();
 
 
@@ -97,14 +103,22 @@ class DynamicArray{
     //-----------------------------------------------------------------------
     public: int* find(int value);
 
-    // Pobranie długości tablicy
+
+    //-----------------------------------------------------------------------
+    // Zwraca długośc tablicy.
+    //-----------------------------------------------------------------------
     public: unsigned getLength() { return length; }
 
-    // Pobranie elementu o zadanym indeksie
+
+    //-----------------------------------------------------------------------
+    // Zwraca adres elementu o zadanym indeksie.
+    //-----------------------------------------------------------------------
     public: int* operator[](unsigned index);
 
 
-    // Zamiana elementów miejscami
+    //-----------------------------------------------------------------------
+    // Zamienia miejscami elementy o wskazanych indeksach.
+    //-----------------------------------------------------------------------
     public: void swap(unsigned index_1, unsigned index_2);
 
 };

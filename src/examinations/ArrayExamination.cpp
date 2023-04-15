@@ -17,8 +17,8 @@ ExaminationRecord ArrayExamination::push_front(DynamicArray* array){
     return { 
         ARRAY,
         PUSH_FRONT,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        new_element,
+        0,
         timer.getResult(microseconds)
     };
 
@@ -39,8 +39,8 @@ ExaminationRecord ArrayExamination::push_back(DynamicArray* array){
     return { 
         ARRAY,
         PUSH_BACK,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        new_element,
+        0,
         timer.getResult(microseconds)
     };
 
@@ -50,7 +50,7 @@ ExaminationRecord ArrayExamination::add_element(DynamicArray* array){
 
     // Generuję nowy element oraz indeks
     int new_element = RandomNumberGenerator::getIntegers(1, INT_MIN, INT_MAX).front();
-    unsigned index = RandomNumberGenerator::getIntegers(1, 0, UINT_MAX).front();
+    unsigned index = RandomNumberGenerator::getIntegers(1, 0, INT_MAX).front();
 
     // Mierzę czas
     Timer timer;
@@ -62,8 +62,8 @@ ExaminationRecord ArrayExamination::add_element(DynamicArray* array){
     return { 
         ARRAY,
         ADD,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        new_element,
+        index,
         timer.getResult(microseconds)
     };
 
@@ -81,8 +81,8 @@ ExaminationRecord ArrayExamination::pop_front(DynamicArray* array){
     return { 
         ARRAY,
         POP_FRONT,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        0,
+        0,
         timer.getResult(microseconds)
     };
 
@@ -100,8 +100,8 @@ ExaminationRecord ArrayExamination::pop_back(DynamicArray* array){
     return { 
         ARRAY,
         POP_BACK,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        0,
+        0,
         timer.getResult(microseconds)
     };
 
@@ -110,7 +110,7 @@ ExaminationRecord ArrayExamination::pop_back(DynamicArray* array){
 ExaminationRecord ArrayExamination::remove_element(DynamicArray* array){
 
     // Generuję indeks
-    unsigned index = RandomNumberGenerator::getIntegers(1, 0, array->getLength()).front();
+    unsigned index = RandomNumberGenerator::getIntegers(1, 0, array->getLength()*2).front();
 
     // Mierzę czas
     Timer timer;
@@ -122,8 +122,8 @@ ExaminationRecord ArrayExamination::remove_element(DynamicArray* array){
     return { 
         ARRAY,
         REMOVE,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        0,
+        index,
         timer.getResult(microseconds)
     };
 
@@ -144,8 +144,8 @@ ExaminationRecord ArrayExamination::find_element(DynamicArray* array){
     return { 
         ARRAY,
         FIND,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        new_element,
+        0,
         timer.getResult(microseconds)
     };
 

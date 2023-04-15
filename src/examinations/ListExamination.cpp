@@ -17,8 +17,8 @@ ExaminationRecord ListExamination::push_front(List list){
     return { 
         LIST,
         PUSH_FRONT,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        new_element,
+        0,
         timer.getResult(microseconds)
     };
 
@@ -39,8 +39,8 @@ ExaminationRecord ListExamination::push_back(List list){
     return { 
         LIST,
         PUSH_BACK,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        new_element,
+        0,
         timer.getResult(microseconds)
     };
 
@@ -62,8 +62,8 @@ ExaminationRecord ListExamination::add_element(List list){
     return { 
         LIST,
         ADD,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        new_element,
+        index,
         timer.getResult(microseconds)
     };
 
@@ -81,8 +81,8 @@ ExaminationRecord ListExamination::pop_front(List list){
     return { 
         LIST,
         POP_FRONT,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        0,
+        0,
         timer.getResult(microseconds)
     };
 
@@ -100,8 +100,8 @@ ExaminationRecord ListExamination::pop_back(List list){
     return { 
         LIST,
         POP_BACK,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        0,
+        0,
         timer.getResult(microseconds)
     };
 
@@ -115,15 +115,15 @@ ExaminationRecord ListExamination::remove_element(List list){
     // Mierzę czas
     Timer timer;
     timer.start();
-    list.remove(index);
+    bool exist = list.remove(index);
     timer.stop();
 
     // Zapisuje zebrane dane w formie rekordu pliku .csv
     return { 
         LIST,
         REMOVE,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        exist,
+        index,
         timer.getResult(microseconds)
     };
 
@@ -140,12 +140,14 @@ ExaminationRecord ListExamination::find_element(List list){
     list.find(new_element);
     timer.stop();
 
+    bool exist = list.find(new_element) != nullptr;
+
     // Zapisuje zebrane dane w formie rekordu pliku .csv
     return { 
         LIST,
         FIND,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        new_element,
+        exist,
         timer.getResult(microseconds)
     };
 

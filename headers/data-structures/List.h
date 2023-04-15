@@ -100,14 +100,14 @@ class List{
 
 
     //-----------------------------------------------------------------------
-    // Usuwa element z początku kolejki. Zwraca true, gdy usunięcie 
+    // Usuwa element z początku listy. Zwraca true, gdy usunięcie 
     // przebiegło pomyślnie. W przeciwnym wypadku zwraca false.
     //-----------------------------------------------------------------------
     public: bool pop_front();
 
 
     //-----------------------------------------------------------------------
-    // Usuwa element z końca kolejki. Zwraca true, gdy usunięcie 
+    // Usuwa element z końca listy. Zwraca true, gdy usunięcie 
     // przebiegło pomyślnie. W przeciwnym wypadku zwraca false.
     //-----------------------------------------------------------------------
     public: bool pop_back();

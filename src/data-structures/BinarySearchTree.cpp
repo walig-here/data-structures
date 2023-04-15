@@ -103,7 +103,7 @@ void BinarySearchTree::print(){
     printf("Zawartosc drzewa:\n");
 
     if(nodes.size() == 0){
-        printf("pusty\n");
+        printf("puste\n");
         return;
     }
 
@@ -352,14 +352,5 @@ void BinarySearchTree::balance(){
 
     }
     
-
-}
-
-void BinarySearchTree::getSize(Node* root, unsigned& size){
-
-    if(root == nullptr) return;
-    size++;
-    getSize(root->left, size);
-    getSize(root->right, size); 
 
 }

@@ -33,14 +33,14 @@ enum OperationType{
  * Rekord zapisujący dane nt przeprowadzonego badania
 */
 struct ExaminationRecord{
-    StructureType structure;    // type struktury
-    OperationType operation;    // operacja
-    double time_s;              // zmierzony czas w sekundach
-    double time_ms;             // czas zmierzony w milisekundach
-    double times_us;            // czas zmierzony w mikrosekundach
+    StructureType structure;        // typ struktury
+    OperationType operation;        // operacja
+    int element_value;              // wartość używanego w teście eksperytmentu
+    long long additional_data;      // dodadkowe dane
+    double times_us;                // czas zmierzony w mikrosekundach
 
     // Konstruktor
-    ExaminationRecord(StructureType structure, OperationType operation, double time_s, double time_ms, double time_us);
+    ExaminationRecord(StructureType structure, OperationType operation, int element, long long additional_data, double time_us);
 
     // Zwraca rekord w formie ciągu znaków
     string getString();

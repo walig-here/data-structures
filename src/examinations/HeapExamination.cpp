@@ -17,8 +17,8 @@ ExaminationRecord HeapExamination::add_element(Heap heap){
     return { 
         HEAP,
         ADD,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        new_element,
+        0,
         timer.getResult(microseconds)
     };
 
@@ -36,8 +36,8 @@ ExaminationRecord HeapExamination::remove_element(Heap heap){
     return { 
         HEAP,
         REMOVE_ROOT,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        0,
+        0,
         timer.getResult(microseconds)
     };
 
@@ -54,12 +54,14 @@ ExaminationRecord HeapExamination::find_element(Heap heap){
     heap.find(new_element);
     timer.stop();
 
+    bool exist = heap.find(new_element) != nullptr;
+
     // Zapisuje zebrane dane w formie rekordu pliku .csv
     return { 
         HEAP,
         FIND,
-        timer.getResult(seconds),
-        timer.getResult(miliseconds),
+        new_element,
+        exist,
         timer.getResult(microseconds)
     };
 

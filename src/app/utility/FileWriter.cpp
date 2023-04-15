@@ -6,7 +6,7 @@ bool FileWriter::saveInt(vector<int> integers, string file_name){
 
     // Próbujemy stworzyć plik, do którego zapiszemy nasze liczby
     fstream file;
-    file.open(file_name, ios::out|ios::app);
+    file.open(file_name, ios::out);
     if(!file.good()) return false;
 
     // Zapisujemy

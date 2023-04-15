@@ -31,59 +31,163 @@ class BinarySearchTree{
 
     /* METODY */
 
-    // Konstruktor
+    //-----------------------------------------------------------------------
+    // Konstruktor. Tworzy puste drzewo wyszukiwań binarnych.
+    //-----------------------------------------------------------------------
     public: BinarySearchTree();
 
-    // Konstruktor kopiujący
+
+    //-----------------------------------------------------------------------
+    // Konstruktor kopiujący.
+    //-----------------------------------------------------------------------
     public: BinarySearchTree(BinarySearchTree* to_copy);
 
-    // Konstruktor pobierający ciąg liczb
+
+    //-----------------------------------------------------------------------
+    // Konstruktor tworzący BST na podstawie zadanego ciągu liczb.
+    // 
+    // Parametry:
+    // elements - ciąg liczb, z którego ma zostać zbudowane BST
+    //-----------------------------------------------------------------------
     public: BinarySearchTree(vector<int> new_elements);
 
-    // Destruktor
+
+    //-----------------------------------------------------------------------
+    // Destruktor. Zwalnia pamięć po BST.
+    //-----------------------------------------------------------------------
     public: ~BinarySearchTree();
 
-    // Wyświetlanie drzewa
+
+    //-----------------------------------------------------------------------
+    // Wyświetla zawartość drzewa.
+    //-----------------------------------------------------------------------
     public: void print();
 
-    // Dodanie elementu
+
+    //-----------------------------------------------------------------------
+    // Dodaje nowy element do drzewa.
+    // 
+    // Parametry:
+    // value - nowa wartość, która ma zostać dodana do BST
+    //-----------------------------------------------------------------------
     public: void add(int value);
 
-    // Wyszukanie elementu
+
+    //-----------------------------------------------------------------------
+    // Wyszukuje w BST element o wskazanej wartości i zwraca jego adres.
+    // W wypadku nie znalezienia żadnego elementu zwróci nullptr.
+    //
+    // Parametry:
+    // value - wartość, jaką ma mieć wyszukiwany element
+    //-----------------------------------------------------------------------
     public: Node* find(int value);
 
-    // Usunięcie elementu
+
+    //-----------------------------------------------------------------------
+    // Usuwa element o zadanej wartości z drzewa.
+    //
+    // Parametry:
+    // value - wartość elementu, który ma zostać usunięty z drzewa.
+    //-----------------------------------------------------------------------
     public: void remove(int value);
 
-    // Rotacja w prawo
+    //-----------------------------------------------------------------------
+    // Wykonuje rotację w prawo względem wierzchołka o wskazanym adresie.
+    // Jeżeli zostanie zadany nullptr, to rotacja się nie wykona.
+    //
+    // Parametry:
+    // node - wierzchołek względem, którego ma zostać wykonana rotacja
+    //-----------------------------------------------------------------------
     public: void rotateRight(Node* node);
 
-    // Rotacja w lewo
+
+    //-----------------------------------------------------------------------
+    // Wykonuje rotację w lewo względem wierzchołka o wskazanym adresie.
+    // Jeżeli zostanie zadany nullptr, to rotacja się nie wykona.
+    //
+    // Parametry:
+    // node - wierzchołek względem, którego ma zostać wykonana rotacja
+    //-----------------------------------------------------------------------
     public: void rotateLeft(Node* node);
 
-    // Równoważenie drzewa
+
+    //-----------------------------------------------------------------------
+    // Wykonuje na drzewie algorymt równoważący DSW.
+    //-----------------------------------------------------------------------
     public: void balance();
 
-    // Zwraca tablicę pozwalającą na na poprawne wyświetlenie drzewa (jak kopca)
-    private: void indexNodes(vector<Node*> &nodes, Node* node, int node_index);
 
-    // Zwraca korzeń
+    //-----------------------------------------------------------------------
+    // Buduje na podstawie istniejących wierzchołków tablicę dynamiczną, 
+    // dzięki czemu można wyświetlić drzewo ananlogicznie do kopca. Jest to
+    // metoda rekurencyjna, która zbiera wierzchołki drzewa w konwencji 
+    // inorder.
+    //
+    // Parametry:
+    // nodes - tablica, w której znajdą się wierzchołki
+    // node - wierzchołek, od którego zaczynamy spisywanie wierzchołków
+    // node_index - indeks wierzchołka, od którego zaczynamy spisywanie
+    //              wierzchołków
+    //-----------------------------------------------------------------------
+    private: void indexNodes(vector<Node*> &nodes, Node* node, int node_index=0);
+
+
+    //-----------------------------------------------------------------------
+    // Zwraca odniesienie do korzenia drzewa. W wypadku, gdy dzrewo jest
+    // puste zwrócony zostanie nullptr.
+    //
+    // Zwraca:
+    // Adres elementu, będącego korzeniem drzewa lub nullptr, gdy drzewo jest
+    // puste.
+    //-----------------------------------------------------------------------
     public: Node* getRoot() { return root; }
 
-    // Zwraca węzeł maksymalny z drzewa o podanym korzeniu
+
+    //-----------------------------------------------------------------------
+    // Zwraca odniesienie do maksymalnego wierzchołka drzewa o zadanym 
+    // korzeniu. Jeżeli drzewo jest puste zwróci nullptr.
+    //
+    // Parametry:
+    // root - korzeń, drzewa, które przeszukujemy
+    //
+    // Zwraca:
+    // Adres maksymalnego wierzchołka we wskazanym drzewie.
+    //-----------------------------------------------------------------------
     public: Node* maxNode(Node* root);
 
-    // Zwraca węzeł minimalny z drzewa o podanym korzewniu
+
+    //-----------------------------------------------------------------------
+    // Zwraca odniesienie do minimalnego wierzchołka drzewa o zadanym 
+    // korzeniu. Jeżeli drzewo jest puste zwróci nullptr.
+    //
+    // Parametry:
+    // root - korzeń, drzewa, które przeszukujemy
+    //
+    // Zwraca:
+    // Adres minimalnego wierzchołka we wskazanym drzewie.
+    //-----------------------------------------------------------------------
     public: Node* minNode(Node* root);
 
-    // Zwraca następnika wskazanego węzła
+
+    //-----------------------------------------------------------------------
+    // Zwraca następnika wskazanego węzła.
+    //
+    // Parametry:
+    // node - węzeł, którego następnika szukamy
+    //
+    // Zwraca:
+    // Adres następnika wskazanego węzła.
+    //-----------------------------------------------------------------------
     public: Node* getSuccessor(Node* node);
 
-    // Prostuje drzewo
-    private: unsigned straighten();
 
-    // Zlicza ilość wierzchołków drzewa o zadanym korzeniu
-    public: void getSize(Node* root, unsigned& tree_size);
+    //-----------------------------------------------------------------------
+    // Metoda prostująca drzewo. Pierwszy etap algorytmu DSW.
+    //
+    // Zwraca:
+    // Ilość wierzchołków prostowanego drzewa.
+    //-----------------------------------------------------------------------
+    private: unsigned straighten();
 
 };
 

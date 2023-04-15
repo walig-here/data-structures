@@ -163,7 +163,7 @@ void HeapModule::examine(){
     for(int j =0; j < 14; j++){
         cout << "ROZMIAR: " << number_of_elements[j] << endl;
         
-        for(int i = 0; i < 50; i++) {
+        for(int i = 0; i < 30; i++) {
             cout << "Proba " << i+1 << "...";
             elements = RandomNumberGenerator::getIntegers(number_of_elements[j], INT_MIN, INT_MAX);
             heap = new Heap(elements);
@@ -178,6 +178,7 @@ void HeapModule::examine(){
         }
 
         FileWriter::save(data, "results/"+filename+to_string(number_of_elements[j])+".csv");
+        data.clear();
         cout << endl;
     }
     

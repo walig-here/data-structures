@@ -123,11 +123,14 @@ void BSTModule::remove(){
 
 void BSTModule::add(){
 
+    
     try{
         tree->add(Console::getIntInput(INSERT_ELEMENT_VALUE));
     } catch(invalid_argument e){
         cout << e.what() << endl;
     }
+
+    
 
 }
 
@@ -138,12 +141,15 @@ void BSTModule::balance(){
 }
 
 void BSTModule::find(){
-
+    Node* element;
     try{
-        tree->find(Console::getIntInput(INSERT_ELEMENT_VALUE));
+        element = tree->find(Console::getIntInput(INSERT_ELEMENT_VALUE));
     } catch(invalid_argument e){
         cout << e.what() << endl;
     }
+
+    if(element == nullptr) cout << "Element nie znajduje sie w tej strukturze!" << endl;
+    else  cout << "Znaleziony element: " << element->value << endl;
     Console::waitForUserResponse();
 
 }
@@ -196,7 +202,7 @@ void BSTModule::examine(){
     for(int j = 0; j < 14; j++){
         cout << "ROZMIAR: " << number_of_elements[j] << endl;
 
-        for(int i = 0; i < 50; i++) {
+        for(int i = 0; i < 30; i++) {
             cout << "Proba " << i+1 << "...";
             elements = RandomNumberGenerator::getIntegers(number_of_elements[j], INT_MIN, INT_MAX);
             cout << "\t";
@@ -225,6 +231,7 @@ void BSTModule::examine(){
         }
 
         FileWriter::save(data, "results/"+filename+to_string(number_of_elements[j])+".csv");
+        data.clear();
         cout << endl;
     }
     

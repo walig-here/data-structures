@@ -1,12 +1,12 @@
 #include "examinations/ExaminationRecord.h"
 #include <string>
 
-ExaminationRecord::ExaminationRecord(StructureType structure, OperationType operation, double time_s, double time_ms, double time_us){
+ExaminationRecord::ExaminationRecord(StructureType structure, OperationType operation, int element, long long additional_data, double time_us){
 
     this->structure = structure;
     this->operation = operation;
-    this->time_s = time_s;
-    this->time_ms = time_ms;
+    this->element_value = element;
+    this->additional_data = additional_data;
     this->times_us = time_us;
 
 }
@@ -39,7 +39,7 @@ string ExaminationRecord::getString(){
     }
 
     // Czasy
-    record_to_string += "," + to_string(time_s) + "," + to_string(time_ms) + "," + to_string(times_us);
+    record_to_string += "," + to_string(element_value) + "," + to_string(additional_data) + "," + to_string(times_us);
 
     // Zwracam rekord
     return record_to_string;
