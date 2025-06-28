@@ -1,1 +1,0 @@
-g++ -I headers src/examinations/*.cpp src/data-structures/*.cpp src/*.cpp src/app/modules/*.cpp src/app/utility/*.cpp -o out/sdizo-projekt-1 -static -O3
