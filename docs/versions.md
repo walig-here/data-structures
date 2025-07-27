@@ -4,11 +4,15 @@ This document contains changelogs for all versions of the *Data Structures* proj
 
 ## [WIP] v2.0.0 — First iterations of *Data Structures Library*
 
-- Implement C++ library with following data structures that are able to work in both *release* and *debug* modes:
+- [ ] Implement C++ library with following data structures for `int` variables that are able to work in both *release* and *debug* modes:
     - [ ] Dynamic array
     - [ ] Linked list
     - [ ] Heap
     - [ ] Binary Search Tree
+- [x] Setup CI pipelines for the C++ library
+    - [x] Build
+    - [x] Test
+    - [x] Linter
 
 ## v1.0.0 — Uni Project
 

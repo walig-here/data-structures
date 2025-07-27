@@ -1,0 +1,68 @@
+name: "C++ library pipeline"
+on:
+    push
+jobs:
+    prepare_docker_image:
+        name: "Create CI Docker container"
+        runs-on: ubuntu-22.04
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v3
+            - name: Prepare image
+              run:  |
+                docker build . -t "data-structures-v2"
+                docker save -o ci-image.tar data-structures-v2
+            - name: Store image
+              uses: actions/upload-artifact@v4
+              with:
+                name: docker-ci-image 
+                path: ci-image.tar
+                retention-days: 1
+
+    build:
+        name: "Build C++ library for Linux"
+        runs-on: ubuntu-22.04
+        needs: prepare_docker_image
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v3
+            - name: "Run CI container"
+              uses: ./.github/actions/run-ci-container
+            - name: Build
+              run:  docker exec data-structures-v2 "data_structures_library/scripts/build-library.sh"
+            - name: Store  build
+              uses: actions/upload-artifact@v4
+              with:
+                name: data-structures-lib.a
+                path: data_structures_library/build/lib/data-structures.a
+
+    test:
+        name: "Test C++ library"
+        runs-on: ubuntu-22.04
+        needs: prepare_docker_image
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v3
+            - name: "Run CI container"
+              uses: ./.github/actions/run-ci-container
+            - name: Build tests
+              run:  docker exec data-structures-v2 "data_structures_library/scripts/build-tests.sh"
+            - name: Test
+              run:  docker exec data-structures-v2 "data_structures_library/scripts/test.sh"
+            - name: Store report
+              uses: actions/upload-artifact@v4
+              with:
+                name: data-structures-lib-coverage.html
+                path: data_structures_library/build/coverage.html
+
+    lint:
+        name: "Lint C++ library"
+        runs-on: ubuntu-22.04
+        needs: prepare_docker_image
+        steps:
+          - name: Checkout repo
+            uses: actions/checkout@v3
+          - name: "Run CI container"
+            uses: ./.github/actions/run-ci-container
+          - name: Lint
+            run:  docker exec data-structures-v2 "data_structures_library/scripts/lint.sh"
